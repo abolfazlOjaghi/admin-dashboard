@@ -1,0 +1,37 @@
+import { TableOfContents, LayoutGrid } from "lucide-react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useFetch } from "../../hooks/useFetch";
+import { getProducts } from "../../services/requests/products";
+import ProductsSection from "./components/productsSection/ProductsSection";
+import TopBar from "./components/productsSection/elements/TopBar";
+const Products = () => {
+  const [productsView, setProductsView] = useState("grid");
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 700);
+    return () => clearTimeout(timer);
+  }, [search]);
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useFetch(
+    () => getProducts(debouncedSearch),
+    ["products", debouncedSearch],
+  );
+  return (
+    <div className="page">
+      <section>
+        <h3>Products</h3>
+        <ProductsSection products={products} productsView={productsView} >
+            <TopBar search={search} searchInputChange={(e) => setSearch(e.target.value)} productsView={productsView} productsViewToggle={() => setProductsView((prev) => (prev === "grid" ? "table" : "grid"))}/>
+        </ProductsSection>
+      </section>
+    </div>
+  );
+};
+export default Products;
