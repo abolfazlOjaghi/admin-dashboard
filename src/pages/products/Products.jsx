@@ -5,6 +5,8 @@ import { useFetch } from "../../hooks/useFetch";
 import { getProducts } from "../../services/requests/products";
 import ProductsSection from "./components/productsSection/ProductsSection";
 import TopBar from "./components/productsSection/elements/TopBar";
+import ProductRowSkeleton from "../../components/products/skeleton/ProductRowSkeleton";
+import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
 const Products = () => {
   const [productsView, setProductsView] = useState("grid");
   const [search, setSearch] = useState("");
@@ -27,9 +29,16 @@ const Products = () => {
     <div className="page">
       <section>
         <h3>Products</h3>
-        <ProductsSection products={products} productsView={productsView} >
-            <TopBar search={search} searchInputChange={(e) => setSearch(e.target.value)} productsView={productsView} productsViewToggle={() => setProductsView((prev) => (prev === "grid" ? "table" : "grid"))}/>
-        </ProductsSection>
+          <ProductsSection products={products} productsView={productsView} isLoading={isLoading}>
+            <TopBar
+              search={search}
+              searchInputChange={(e) => setSearch(e.target.value)}
+              productsView={productsView}
+              productsViewToggle={() =>
+                setProductsView((prev) => (prev === "grid" ? "table" : "grid"))
+              }
+            />
+          </ProductsSection>
       </section>
     </div>
   );
