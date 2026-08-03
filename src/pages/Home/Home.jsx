@@ -13,8 +13,9 @@ import { useFetch } from "../../hooks/useFetch";
 import { getComments } from "../../services/requests/comments";
 import Comment from "../../components/Comment";
 import { getLatests } from "../../utils/getLatests";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 const Home = () => {
-  const [chartType, setChartType] = useState("line");
+  const [chartType, setChartType] = useLocalStorage("chartType", "line");
   const {
     data: productsData,
     isLoading,
