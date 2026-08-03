@@ -7,8 +7,9 @@ import ProductsSection from "./components/productsSection/ProductsSection";
 import TopBar from "./components/productsSection/elements/TopBar";
 import ProductRowSkeleton from "../../components/products/skeleton/ProductRowSkeleton";
 import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 const Products = () => {
-  const [productsView, setProductsView] = useState("grid");
+  const [productsView, setProductsView] = useLocalStorage("productsView", "grid");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   useEffect(() => {
