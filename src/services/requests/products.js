@@ -4,3 +4,7 @@ export const getProducts = async (search = null) => {
     const { data } = await apiRequests.get(url)
     return data
 }
+export const getSingleProduct = async (productId) => {
+    const { data } = await apiRequests.get(`/products/${productId}`)
+    return data
+}

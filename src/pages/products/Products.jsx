@@ -1,6 +1,5 @@
 import { TableOfContents, LayoutGrid } from "lucide-react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { getProducts } from "../../services/requests/products";
 import ProductsSection from "./components/productsSection/ProductsSection";

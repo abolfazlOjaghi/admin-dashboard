@@ -23,6 +23,7 @@ const ProductsSection = ({ children, products, productsView, isLoading }) => {
                 price: product.price,
                 rating: product.rating,
                 productsView,
+                infoRoot : `/products/${product.id}`
               };
               return productsView === "grid" ? (
                 <ProductCard {...productProps} />

@@ -6,6 +6,12 @@
 .page h3 {
     @apply text-3xl font-semibold ;
 }
+.details span {
+    @apply text-gray-500;
+}
+.details p {
+    @apply font-semibold text-lg;
+}
 * {
     user-select: none;
 }

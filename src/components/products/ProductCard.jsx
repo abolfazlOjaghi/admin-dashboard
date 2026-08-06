@@ -1,5 +1,6 @@
 import { Children } from "react";
-const ProductCard = ({ children, image, title, price, rating }) => {
+import { Link } from "react-router";
+const ProductCard = ({ children, image, title, price, rating, infoRoot }) => {
   return (
     <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 pb-4 relative">
       {children}
@@ -14,7 +15,7 @@ const ProductCard = ({ children, image, title, price, rating }) => {
           <p className="font-medium text-lg">rate : {rating}/5</p>
       </div>
       <div className="px-6 py-2">
-        <button className="bg-blue-600 w-full py-1.5 rounded-xl hover:bg-blue-700 text-white" >Info</button>
+        <Link to={infoRoot}><button className="bg-blue-600 w-full py-1.5 rounded-xl hover:bg-blue-700 text-white cursor-pointer" >Info</button></Link>
       </div>
     </div>
   );

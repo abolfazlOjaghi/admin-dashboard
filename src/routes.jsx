@@ -4,6 +4,7 @@ import RootLayout from "./layouts/RootLayout";
 import Products from "./pages/products/Products";
 import Users from "./pages/Users";
 import Comments from "./pages/Comments";
+import ProductInfo from "./pages/productInfo/ProductInfo";
 const routes = createBrowserRouter([
     {
         path : "/",
@@ -16,6 +17,10 @@ const routes = createBrowserRouter([
             {
                 path : "/products",
                 element : <Products/>
+            },
+            {
+                path : "/products/:productId",
+                element : <ProductInfo/>
             },
             {
                 path : "/users",
