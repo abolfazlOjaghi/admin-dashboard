@@ -2,9 +2,8 @@ import { fields, dimensionsFields } from "../../../data/productInfoFields";
 const Details = ({ productDetails = {} }) => {
   return (
     <section className="space-y-4 details flex items-center gap-x-4">
-      <ul className="bg-zinc-900 rounded-xl p-12 space-y-3">
+      <ul className="dark:bg-zinc-900 rounded-xl p-12 space-y-3 bg-gray-50">
         <h3>Details</h3>
-        {/*  */}
         {fields.map((field) => {
           return (
             <li className="flex gap-x-2">
@@ -15,7 +14,7 @@ const Details = ({ productDetails = {} }) => {
         })}
       </ul>
       <div className="space-y-8">
-        <ul className="bg-zinc-900 rounded-xl p-12 space-y-4">
+        <ul className="dark:bg-zinc-900 bg-gray-50 rounded-xl p-12 space-y-4">
           <h3>Dimensions</h3>
           <div className="flex gap-x-4">
             {dimensionsFields.map((field) => {
@@ -28,7 +27,7 @@ const Details = ({ productDetails = {} }) => {
             })}
           </div>
         </ul>
-        <div className="bg-zinc-900 p-8 rounded-xl *:text-6xl *:font-semibold">
+        <div className="dark:bg-zinc-900 p-8 rounded-xl *:text-6xl *:font-semibold bg-gray-50">
             <h4>{productDetails?.price}$</h4>
         </div>
       </div>

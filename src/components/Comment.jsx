@@ -1,7 +1,7 @@
 import { CircleUserRound, ThumbsUp, Star } from "lucide-react";
 const Comment = ({ body, likes = "", fullName, username = "", email = "", rating = "" }) => {
   return (
-    <div className="rounded-xl px-4 py-2 dark:bg-zinc-900 bg-gray-100 space-y-4">
+    <div className="rounded-xl px-4 py-2 dark:bg-zinc-900 bg-gray-50 space-y-4">
       <div className="flex items-center gap-x-2">
         <CircleUserRound size={40} />
         <div>
