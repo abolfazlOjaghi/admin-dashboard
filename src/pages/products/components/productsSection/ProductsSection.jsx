@@ -6,12 +6,12 @@ import ProductCardSkeleton from "../../../../components/products/skeleton/Produc
 import ProductRowSkeleton from "../../../../components/products/skeleton/ProductRowSkeleton";
 const ProductsSection = ({ children, products, productsView, isLoading }) => {
   return (
-    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-4 px-8 space-y-16">
+    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-8 px-8 space-y-16">
       {children}
       <div
         className={clsx(
           "gap-8",
-          productsView === "grid" ? "grid grid-cols-5" : "flex flex-col",
+          productsView === "grid" ? "grid grid-cols-5" : "flex flex-col items-center",
         )}
       >
         {products

@@ -1,8 +1,9 @@
 import { Children } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 const ProductCard = ({ children, image, title, price, rating, infoRoot }) => {
+  const navigate = useNavigate()
   return (
-    <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 pb-4 relative">
+    <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 pb-4 relative cursor-pointer" onClick={() => navigate(infoRoot)}>
       {children}
                   <img
         src={image}
@@ -15,7 +16,7 @@ const ProductCard = ({ children, image, title, price, rating, infoRoot }) => {
           <p className="font-medium text-lg">rate : {rating}/5</p>
       </div>
       <div className="px-6 py-2">
-        <Link to={infoRoot}><button className="bg-blue-600 w-full py-1.5 rounded-xl hover:bg-blue-700 text-white cursor-pointer" >Info</button></Link>
+        <button className="bg-blue-600 w-full py-1.5 rounded-xl hover:bg-blue-700 text-white cursor-pointer" >Info</button>
       </div>
     </div>
   );

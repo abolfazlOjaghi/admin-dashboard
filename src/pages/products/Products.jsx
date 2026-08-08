@@ -27,7 +27,7 @@ const Products = () => {
   );
   return (
     <div className="page">
-      <section>
+      <section className="">
         <h3>Products</h3>
           <ProductsSection products={products} productsView={productsView} isLoading={isLoading}>
             <TopBar

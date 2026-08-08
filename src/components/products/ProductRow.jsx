@@ -1,8 +1,9 @@
 import { ChevronRight } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 const ProductRow = ({ children, image, title, price, rating, infoRoot }) => {
+  const navigate = useNavigate()
   return (
-    <div className="w-full flex items-center bg-gray-100 dark:bg-zinc-950 rounded-xl gap-x-4 pr-32">
+    <div className="w-full flex items-center bg-gray-100 dark:bg-zinc-950 rounded-xl gap-x-4 pr-32 cursor-pointer" onClick={() => navigate(infoRoot)}>
       <img src={image} className="size-52" />
       <div className="flex justify-between w-full items-center">
         <div>
