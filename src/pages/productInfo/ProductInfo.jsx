@@ -1,16 +1,19 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
 import { getSingleProduct } from "../../services/requests/products";
 import Details from "./components/Details";
 import Comment from "../../components/Comment";
+import { ArrowLeft } from "lucide-react";
 const ProductsInfo = () => {
   const { productId } = useParams();
   const { data, isLoading, isError } = useFetch(
     () => getSingleProduct(productId),
     [productId],
   );
+  const navigate = useNavigate()
   return (
-    <div className="page">
+    <div className="page space-y-4">
+      <button className="flex items-center gap-x-1.5 rounded-lg cursor-pointer bg-blue-600 px-4 py-1.5 text-white hover:bg-blue-700" onClick={() => navigate(-1)}><ArrowLeft />Back</button>
       <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
         <div className="flex items-center">
           <img src={data?.thumbnail} alt="" />
