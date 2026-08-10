@@ -1,7 +1,7 @@
 import { TableOfContents, LayoutGrid } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
-import { getProducts } from "../../services/requests/products";
+import { getCategories, getProducts } from "../../services/requests/products";
 import ProductsSection from "./components/productsSection/ProductsSection";
 import TopBar from "./components/productsSection/elements/TopBar";
 import ProductRowSkeleton from "../../components/products/skeleton/ProductRowSkeleton";
@@ -11,6 +11,7 @@ const Products = () => {
   const [productsView, setProductsView] = useLocalStorage("productsView", "grid");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("")
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -22,9 +23,10 @@ const Products = () => {
     isLoading,
     isError,
   } = useFetch(
-    () => getProducts(debouncedSearch),
-    ["products", debouncedSearch],
+    () => getProducts(debouncedSearch, selectedCategory),
+    ["products", debouncedSearch, selectedCategory],
   );
+  const { data : categories } = useFetch(getCategories, ["categories"])
   return (
     <div className="page">
       <section className="">
@@ -37,6 +39,9 @@ const Products = () => {
               productsViewToggle={() =>
                 setProductsView((prev) => (prev === "grid" ? "table" : "grid"))
               }
+              categories={categories}
+              selectedCategory={selectedCategory}
+              changeCategory={setSelectedCategory}
             />
           </ProductsSection>
       </section>
