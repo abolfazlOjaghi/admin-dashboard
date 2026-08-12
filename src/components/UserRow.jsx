@@ -29,7 +29,7 @@ const UserRow = ({
           </div>
         </div>
         <button
-          className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5"
+          className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer"
           onClick={() => setIsMoreInfoOpen((prev) => !prev)}
         >
           <p>show more info</p>

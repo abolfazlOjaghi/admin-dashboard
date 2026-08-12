@@ -61,6 +61,7 @@ const Home = () => {
             return (
               <ProductCard
                 key={product.id}
+                infoRoot={`/products/${product.id}`}
                 image={product.images[0]}
                 title={product.title}
                 price={product.price}
