@@ -5,32 +5,40 @@ import Products from "./pages/products/Products";
 import Users from "./pages/Users";
 import Comments from "./pages/Comments";
 import ProductInfo from "./pages/productInfo/ProductInfo";
+import NotFound from "./pages/NotFound";
 const routes = createBrowserRouter([
-    {
-        path : "/",
-        element : <RootLayout/>,
-        children : [
-            {
-                index : true,
-                element : <Home/>
-            },
-            {
-                path : "/products",
-                element : <Products/>
-            },
-            {
-                path : "/products/:productId",
-                element : <ProductInfo/>
-            },
-            {
-                path : "/users",
-                element : <Users/>
-            },
-            {
-                path : "/comments",
-                element : <Comments/>
-            }
-        ]
-    }
-])
-export default routes
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
+      },
+      {
+        path: "/products/:productId",
+        element: <ProductInfo />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
+      },
+      {
+        path: "/comments",
+        element: <Comments />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+        handle: {
+          isNotFound: true,
+        },
+      },
+    ],
+  },
+]);
+export default routes;
