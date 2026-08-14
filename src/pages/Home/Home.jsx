@@ -10,7 +10,7 @@ import Badge from "../../components/products/Badge";
 import { getUsers } from "../../services/requests/users";
 import UserRow from "../../components/UserRow";
 import { useFetch } from "../../hooks/useFetch";
-import { getComments } from "../../services/requests/comments";
+import { getAllComments } from "../../services/requests/comments";
 import Comment from "../../components/Comment";
 import { getLatests } from "../../utils/getLatests";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
@@ -33,12 +33,16 @@ const Home = () => {
     data: comments,
     isLoading: commentsLoading,
     isError: commentsError,
-  } = useFetch(getComments, ["Comments"]);
-  const latestComments = getLatests(comments?.comments)
-  const latestUsers = getLatests(usersData?.users)
+  } = useFetch(getAllComments, ["comments"]);
+  const latestComments = getLatests(comments?.comments);
+  const latestUsers = getLatests(usersData?.users);
   return (
     <div className="page space-y-12">
-      <InfoSection totalProducts={productsData?.total} totalUsers={usersData?.total} totalComments={comments?.total}/>
+      <InfoSection
+        totalProducts={productsData?.total}
+        totalUsers={usersData?.total}
+        totalComments={comments?.total}
+      />
       <section>
         <h3 className="ml-14">Revenue Overview</h3>
         <div className="flex gap-x-16 items-center">

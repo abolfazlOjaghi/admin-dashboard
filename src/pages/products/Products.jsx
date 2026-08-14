@@ -8,10 +8,13 @@ import ProductRowSkeleton from "../../components/products/skeleton/ProductRowSke
 import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 const Products = () => {
-  const [productsView, setProductsView] = useLocalStorage("productsView", "grid");
+  const [productsView, setProductsView] = useLocalStorage(
+    "productsView",
+    "grid",
+  );
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("");
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -26,24 +29,28 @@ const Products = () => {
     () => getProducts(debouncedSearch, selectedCategory),
     ["products", debouncedSearch, selectedCategory],
   );
-  const { data : categories } = useFetch(getCategories, ["categories"])
+  const { data: categories } = useFetch(getCategories, ["categories"]);
   return (
     <div className="page">
-      <section className="">
+      <section>
         <h3>Products</h3>
-          <ProductsSection products={products} productsView={productsView} isLoading={isLoading}>
-            <TopBar
-              search={search}
-              searchInputChange={(e) => setSearch(e.target.value)}
-              productsView={productsView}
-              productsViewToggle={() =>
-                setProductsView((prev) => (prev === "grid" ? "table" : "grid"))
-              }
-              categories={categories}
-              selectedCategory={selectedCategory}
-              changeCategory={setSelectedCategory}
-            />
-          </ProductsSection>
+        <ProductsSection
+          products={products}
+          productsView={productsView}
+          isLoading={isLoading}
+        >
+          <TopBar
+            search={search}
+            searchInputChange={(e) => setSearch(e.target.value)}
+            productsView={productsView}
+            productsViewToggle={() =>
+              setProductsView((prev) => (prev === "grid" ? "table" : "grid"))
+            }
+            categories={categories}
+            selectedCategory={selectedCategory}
+            changeCategory={setSelectedCategory}
+          />
+        </ProductsSection>
       </section>
     </div>
   );
