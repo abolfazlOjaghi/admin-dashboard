@@ -1,9 +1,9 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-const ProductCardSkeleton = () => {
+const ProductCardSkeleton = ({ num = 5 }) => {
   return (
     <>
-      {Array.from({ length: 5 }).map((_, i) => {
+      {Array.from({ length: num }).map((_, i) => {
         return (
           <div
             className="rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 pb-4 w-full"

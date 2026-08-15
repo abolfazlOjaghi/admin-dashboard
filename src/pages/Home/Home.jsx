@@ -14,11 +14,13 @@ import { getAllComments } from "../../services/requests/comments";
 import Comment from "../../components/comment/Comment";
 import { getLatests } from "../../utils/getLatests";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
+import CommentSkeleton from "../../components/comment/skeleton/CommentSkeleton";
 const Home = () => {
   const [chartType, setChartType] = useLocalStorage("chartType", "line");
   const {
     data: productsData,
-    isLoading,
+    isLoading : productsLoading,
     isError,
   } = useFetch(() => getProducts(), ["products"]);
   const {
@@ -61,7 +63,9 @@ const Home = () => {
       <section>
         <h3>Product Highlights</h3>
         <div className="grid grid-cols-4 gap-x-16">
-          {highlights?.map((product) => {
+          {productsLoading ? (
+            <ProductCardSkeleton num={4}/>
+          ) : highlights?.map((product) => {
             return (
               <ProductCard
                 key={product.id}
@@ -100,7 +104,11 @@ const Home = () => {
       <section>
         <h3>Recent Comments</h3>
         <div className="space-y-4">
-          {latestComments.map((comment) => {
+          {commentsLoading ? (
+            Array.from({ length : 5 }).map((_, i) => {
+              return <CommentSkeleton key={i}/>
+            })
+          ) : latestComments.map((comment) => {
             return (
               <Comment
                 body={comment.body}
