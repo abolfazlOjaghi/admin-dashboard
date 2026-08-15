@@ -11,7 +11,7 @@ import { getUsers } from "../../services/requests/users";
 import UserRow from "../../components/UserRow";
 import { useFetch } from "../../hooks/useFetch";
 import { getAllComments } from "../../services/requests/comments";
-import Comment from "../../components/Comment";
+import Comment from "../../components/comment/Comment";
 import { getLatests } from "../../utils/getLatests";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 const Home = () => {

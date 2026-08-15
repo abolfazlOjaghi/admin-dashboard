@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
 import { getSingleProduct } from "../../services/requests/products";
 import Details from "./components/Details";
-import Comment from "../../components/Comment";
+import Comment from "../../components/comment/Comment";
 import { ArrowLeft } from "lucide-react";
 const ProductsInfo = () => {
   const { productId } = useParams();

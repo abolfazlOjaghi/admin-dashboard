@@ -1,19 +1,24 @@
 import { useFetch } from "../hooks/useFetch";
 import { getPaginationComments } from "../services/requests/comments";
-import Comment from "../components/Comment";
+import Comment from "../components/comment/Comment";
 import { useState } from "react";
 import { COMMENTS_LIMIT } from "../data/constans";
 import { getPaginationPages } from "../utils/getPaginationPages";
 import { useSearchParams } from "react-router";
 import clsx from "clsx";
+import { useEffect } from "react";
+import CommentSkeleton from "../components/comment/skeleton/CommentSkeleton";
 const Comments = () => {
   //   const [pagination, setPagination] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const pagination = Number(searchParams.get("page")) || 1;
-  const { data: comments } = useFetch(
+  const { data: comments, isLoading } = useFetch(
     () => getPaginationComments(pagination, COMMENTS_LIMIT),
     ["comments", pagination, COMMENTS_LIMIT],
   );
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pagination]);
   const lastPage = Math.ceil(comments?.total / COMMENTS_LIMIT);
   const pages = getPaginationPages(pagination, lastPage);
   return (
@@ -21,7 +26,11 @@ const Comments = () => {
       <section>
         <h3>Comments</h3>
         <div className="space-y-4">
-          {comments?.comments.map((comment) => {
+          {isLoading ? (
+            Array.from({ length : 10 }).map(() => {
+              return <CommentSkeleton/>
+            })
+          ) : comments?.comments.map((comment) => {
             return (
               <Comment
                 key={comment.id}
