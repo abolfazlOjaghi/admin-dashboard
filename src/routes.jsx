@@ -6,6 +6,7 @@ import Users from "./pages/Users";
 import Comments from "./pages/Comments";
 import ProductInfo from "./pages/productInfo/ProductInfo";
 import NotFound from "./pages/NotFound";
+import UserProfile from "./pages/UserProfile";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
       {
         path: "/comments",
         element: <Comments />,
+      },
+      {
+        path : "/users/:userId",
+        element : <UserProfile/>
       },
       {
         path: "*",

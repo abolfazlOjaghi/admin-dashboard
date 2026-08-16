@@ -90,12 +90,8 @@ const Home = () => {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 image={user.image}
-                email={user.email}
-                phone={user.phone}
                 username={user.username}
-                password={user.password}
-                address={user.address}
-                age={user.age}
+                id={user.id}
               />
             );
           })}

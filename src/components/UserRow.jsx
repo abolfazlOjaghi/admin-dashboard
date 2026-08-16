@@ -1,17 +1,13 @@
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router";
 const UserRow = ({
   firstName,
   lastName,
   username,
-  email,
-  phone,
   image,
-  password,
-  address,
-  age,
+  id
 }) => {
-  const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
+  const navigate = useNavigate() 
   return (
     <div className="bg-gray-100 dark:bg-zinc-900 rounded-xl px-12 py-4 space-y-4">
       <div className="flex justify-between items-center">
@@ -29,23 +25,13 @@ const UserRow = ({
           </div>
         </div>
         <button
-          className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer"
-          onClick={() => setIsMoreInfoOpen((prev) => !prev)}
+          className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600 transition-all duration-100"
+          onClick={() => navigate(`/users/${id}`)}
         >
-          <p>show more info</p>
-          {!isMoreInfoOpen ? <ChevronDown /> : <ChevronUp />}
+          <p>View Profile</p>
+          <ChevronRight/>
         </button>
       </div>
-      {isMoreInfoOpen && (
-        <div className="font-medium text-gray-500">
-          <p>phone : {phone}</p>
-          <p>email : {email}</p>
-          <p>password : {password}</p>
-          <p>country : {address.country}</p>
-          <p>city : {address.city}</p>
-          <p>age : {age}</p>
-        </div>
-      )}
     </div>
   );
 };
