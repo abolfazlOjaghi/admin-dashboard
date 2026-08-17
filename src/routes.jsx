@@ -29,12 +29,12 @@ const routes = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: "/comments",
-        element: <Comments />,
-      },
-      {
         path : "/users/:userId",
         element : <UserProfile/>
+      },
+      {
+        path: "/comments",
+        element: <Comments />,
       },
       {
         path: "*",
