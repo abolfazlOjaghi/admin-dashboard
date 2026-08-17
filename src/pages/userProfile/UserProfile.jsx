@@ -1,12 +1,15 @@
 import { useParams } from "react-router"
-import { useFetch } from "../hooks/useFetch"
-import { getUserById } from "../services/requests/users"
+import { useFetch } from "../../hooks/useFetch"
+import { getUserById } from "../../services/requests/users"
+import { personalInfoFields, addressFields } from "../../data/userInfoFields"
+import InfoRow from "./components/InfoRow"
 const UserProfile = () => {
     const { userId } = useParams()
     const { data : user } = useFetch(() => getUserById(userId), ["user", userId])
+    
     return (
         <div className="page">
-            <section className="bg-gray-100 dark:bg-zinc-950 rounded-xl py-8 px-6">
+            <section className="bg-gray-100 dark:bg-zinc-950 rounded-xl py-8 px-16">
                 <div className="flex flex-col items-center justify-center">
                     <img src={user?.image} alt="" className="rounded-full overflow-hidden size-20 border-2 border-gray-500" />
                     <p className="text-lg font-medium">{user?.firstName} {user?.lastName}</p>
@@ -15,18 +18,23 @@ const UserProfile = () => {
                 <div className="*:space-y-4 space-y-4">
                     <div>
                         <h3>Personal Information</h3>
-                        <p>Email : <span>{user?.email}</span></p>
-                        <p>Password : <span>{user?.password}</span></p>
-                        <p>Phone : <span>{user?.phone}</span></p>
-                        <p>Date Of Birth : <span>{user?.birthDate}</span></p>
-                        <p>Age : <span>{user?.age}</span></p>
+                        {
+                            personalInfoFields.map(info => {
+                                return (
+                                    <InfoRow label={info.label} value={user?.[info.key]}/>
+                                )
+                            })
+                        }
                     </div>
                     <div>
                         <h3>Address</h3>
-                        <p>Country : <span>{user?.address.country}</span></p>
-                        <p>State : <span>{user?.address.state}</span></p>
-                        <p>City : <span>{user?.address.city}</span></p>
-                        <p>Postal Code : <span>{user?.address.postalCode}</span></p>
+                        {
+                           addressFields.map(address => {
+                            return (
+                                <InfoRow label={address.label} value={user?.address[address.key]}/>
+                            )
+                           }) 
+                        }
                     </div>
                 </div>
             </section>

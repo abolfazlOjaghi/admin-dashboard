@@ -6,7 +6,7 @@ import Users from "./pages/Users";
 import Comments from "./pages/Comments";
 import ProductInfo from "./pages/productInfo/ProductInfo";
 import NotFound from "./pages/NotFound";
-import UserProfile from "./pages/UserProfile";
+import UserProfile from "./pages/userProfile/UserProfile";
 const routes = createBrowserRouter([
   {
     path: "/",
