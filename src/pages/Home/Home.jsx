@@ -8,7 +8,7 @@ import { getProducts } from "../../services/requests/products";
 import { getProductHighlights } from "../../utils/getProductHighlights";
 import Badge from "../../components/products/Badge";
 import { getUsers } from "../../services/requests/users";
-import UserRow from "../../components/UserRow";
+import UserRow from "../../components/user/UserRow";
 import { useFetch } from "../../hooks/useFetch";
 import { getAllComments } from "../../services/requests/comments";
 import Comment from "../../components/comment/Comment";
@@ -16,6 +16,7 @@ import { getLatests } from "../../utils/getLatests";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
 import CommentSkeleton from "../../components/comment/skeleton/CommentSkeleton";
+import UserSkeleton from "../../components/user/skeleton/UserSkeleton";
 const Home = () => {
   const [chartType, setChartType] = useLocalStorage("chartType", "line");
   const {
@@ -27,7 +28,7 @@ const Home = () => {
     data: usersData,
     isLoading: usersLoading,
     isError: usersError,
-  } = useFetch(getUsers, ["users"]);
+  } = useFetch(getUsers, ["home-users"]);
   const highlights = productsData
     ? getProductHighlights(productsData.products)
     : [];
@@ -83,7 +84,11 @@ const Home = () => {
       <section>
         <h3>Latest Users</h3>
         <div className="space-y-4">
-          {latestUsers.map((user) => {
+          {usersLoading ? (
+            Array.from({ length : 5 }).map((_, i) => {
+              return <UserSkeleton key={i}/>
+            })
+          ) : latestUsers.map((user) => {
             return (
               <UserRow
                 key={user.id}
