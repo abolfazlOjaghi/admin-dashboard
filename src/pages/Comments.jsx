@@ -1,51 +1,52 @@
 import { useFetch } from "../hooks/useFetch";
 import { getPaginationComments } from "../services/requests/comments";
 import Comment from "../components/comment/Comment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { COMMENTS_LIMIT } from "../data/constans";
-import { getPaginationPages } from "../utils/getPaginationPages";
-import { useSearchParams } from "react-router";
 import clsx from "clsx";
-import { useEffect } from "react";
 import CommentSkeleton from "../components/comment/skeleton/CommentSkeleton";
+import { usePagination } from "../hooks/usePagination";
 const Comments = () => {
-  //   const [pagination, setPagination] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const pagination = Number(searchParams.get("page")) || 1;
+  const [totalComments, setTotalComments] = useState(0);
+  const {
+    page: currentPage,
+    pages,
+    nextPage,
+    prevPage,
+    goToPage,
+  } = usePagination(totalComments, COMMENTS_LIMIT);
   const { data: comments, isLoading } = useFetch(
-    () => getPaginationComments(pagination, COMMENTS_LIMIT),
-    ["comments", pagination, COMMENTS_LIMIT],
+    () => getPaginationComments(currentPage, COMMENTS_LIMIT),
+    ["comments", currentPage, COMMENTS_LIMIT],
   );
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pagination]);
-  const lastPage = Math.ceil(comments?.total / COMMENTS_LIMIT);
-  const pages = getPaginationPages(pagination, lastPage);
+    comments?.total && setTotalComments(comments?.total);
+  }, [comments]);
   return (
     <div className="page">
       <section>
         <h3>Comments</h3>
         <div className="space-y-4">
-          {isLoading ? (
-            Array.from({ length : 10 }).map(() => {
-              return <CommentSkeleton/>
-            })
-          ) : comments?.comments.map((comment) => {
-            return (
-              <Comment
-                key={comment.id}
-                body={comment.body}
-                likes={comment.likes}
-                fullName={comment.user.fullName}
-                username={comment.user.username}
-              />
-            );
-          })}
+          {isLoading
+            ? Array.from({ length: 10 }).map(() => {
+                return <CommentSkeleton />;
+              })
+            : comments?.comments.map((comment) => {
+                return (
+                  <Comment
+                    key={comment.id}
+                    body={comment.body}
+                    likes={comment.likes}
+                    fullName={comment.user.fullName}
+                    username={comment.user.username}
+                  />
+                );
+              })}
         </div>
         <div className="space-x-4 text-center">
           <button
             className="pagination-button"
-            onClick={() => setSearchParams({ page: pagination - 1 })}
+            onClick={prevPage}
             disabled={comments?.skip === 0}
           >
             Prev
@@ -53,8 +54,8 @@ const Comments = () => {
           {pages.map((page, index) => {
             return (
               <button
-                disabled={page === pagination || page === "..."}
-                onClick={() => setSearchParams({ page: page })}
+                disabled={page === currentPage || page === "..."}
+                onClick={() => goToPage(page)}
                 key={index}
                 className={clsx(
                   " bg-blue-600 text-white px-5 py-2 font-medium rounded-xl border-3 border-blue-600",
@@ -69,7 +70,7 @@ const Comments = () => {
           })}
           <button
             className="pagination-button"
-            onClick={() => setSearchParams({ page: pagination + 1 })}
+            onClick={nextPage}
             disabled={comments?.skip + comments?.limit >= comments?.total}
           >
             Next
