@@ -21,14 +21,13 @@ const Home = () => {
   const [chartType, setChartType] = useLocalStorage("chartType", "line");
   const {
     data: productsData,
-    isLoading : productsLoading,
+    isLoading: productsLoading,
     isError,
   } = useFetch(() => getProducts(), ["products"]);
-  const {
-    data: usersData,
-    isLoading: usersLoading,
-    isError: usersError,
-  } = useFetch(getUsers, ["home-users"]);
+  const { data: usersData, isLoading: usersLoading } = useFetch(
+    () => getUsers(),
+    ["home-users"],
+  );
   const highlights = productsData
     ? getProductHighlights(productsData.products)
     : [];
@@ -65,60 +64,62 @@ const Home = () => {
         <h3>Product Highlights</h3>
         <div className="grid grid-cols-4 gap-x-16">
           {productsLoading ? (
-            <ProductCardSkeleton num={4}/>
-          ) : highlights?.map((product) => {
-            return (
-              <ProductCard
-                key={product.id}
-                infoRoot={`/products/${product.id}`}
-                image={product.images[0]}
-                title={product.title}
-                price={product.price}
-                rating={product.rating}
-                children={<Badge text={product.text} color={product.color} />}
-              />
-            );
-          })}
+            <ProductCardSkeleton num={4} />
+          ) : (
+            highlights?.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  infoRoot={`/products/${product.id}`}
+                  image={product.images[0]}
+                  title={product.title}
+                  price={product.price}
+                  rating={product.rating}
+                  children={<Badge text={product.text} color={product.color} />}
+                />
+              );
+            })
+          )}
         </div>
       </section>
       <section>
         <h3>Latest Users</h3>
         <div className="space-y-4">
-          {usersLoading ? (
-            Array.from({ length : 5 }).map((_, i) => {
-              return <UserSkeleton key={i}/>
-            })
-          ) : latestUsers.map((user) => {
-            return (
-              <UserRow
-                key={user.id}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                image={user.image}
-                username={user.username}
-                id={user.id}
-              />
-            );
-          })}
+          {usersLoading
+            ? Array.from({ length: 5 }).map((_, i) => {
+                return <UserSkeleton key={i} />;
+              })
+            : latestUsers.map((user) => {
+                return (
+                  <UserRow
+                    key={user.id}
+                    id={user.id}
+                    firstName={user.firstName}
+                    lastName={user.lastName}
+                    username={user.username}
+                    image={user.image}
+                  />
+                );
+              })}
         </div>
       </section>
       <section>
         <h3>Recent Comments</h3>
         <div className="space-y-4">
-          {commentsLoading ? (
-            Array.from({ length : 5 }).map((_, i) => {
-              return <CommentSkeleton key={i}/>
-            })
-          ) : latestComments.map((comment) => {
-            return (
-              <Comment
-                body={comment.body}
-                fullName={comment.user.fullName}
-                username={comment.user.username}
-                likes={comment.likes}
-              />
-            );
-          })}
+          {commentsLoading
+            ? Array.from({ length: 5 }).map((_, i) => {
+                return <CommentSkeleton key={i} />;
+              })
+            : latestComments.map((comment) => {
+                return (
+                  <Comment
+                    body={comment.body}
+                    fullName={comment.user.fullName}
+                    username={comment.user.username}
+                    likes={comment.likes}
+                  />
+                );
+              })}
         </div>
       </section>
     </div>
