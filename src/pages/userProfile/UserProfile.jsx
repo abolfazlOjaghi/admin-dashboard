@@ -3,12 +3,13 @@ import { useFetch } from "../../hooks/useFetch"
 import { getUserById } from "../../services/requests/users"
 import { personalInfoFields, addressFields } from "../../data/userInfoFields"
 import InfoRow from "./components/InfoRow"
+import BackButton from "../../components/ui/BackButton"
 const UserProfile = () => {
     const { userId } = useParams()
     const { data : user } = useFetch(() => getUserById(userId), ["user", userId])
-    
     return (
-        <div className="page">
+        <div className="page space-y-3">
+            <BackButton/>
             <section className="bg-gray-100 dark:bg-zinc-950 rounded-xl py-8 px-16">
                 <div className="flex flex-col items-center justify-center">
                     <img src={user?.image} alt="" className="rounded-full overflow-hidden size-20 border-2 border-gray-500" />
