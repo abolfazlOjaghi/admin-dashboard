@@ -9,9 +9,11 @@ export const getUsers = async (
 ) => {
   const skip = (obj.page - 1) * obj.limit;
   const url =
-    !obj.search
-      ? `/users?limit=${obj.limit}&skip=${skip}`
-      : `/users/search?q=${obj.search}&limit=0`;
+    !obj.search && !obj.page && !obj.limit
+      ? "/users?limit=0"
+      : !obj.search
+        ? `/users?limit=${obj.limit}&skip=${skip}`
+        : `/users/search?q=${obj.search}&limit=0`;
   const { data } = await apiRequests(url);
   return data;
 };
