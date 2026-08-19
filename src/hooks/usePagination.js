@@ -15,8 +15,11 @@ export const usePagination = (total, limit = 30) => {
   const goToPage = (page) => {
     page <= totalPages && setParams({ page });
   };
+  const goFirstPage = () => {
+    setParams({ page: 1 });
+  }
     useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
-  return { pages, nextPage, prevPage, page, totalPages, goToPage };
+  return { pages, nextPage, prevPage, page, totalPages, goToPage, goFirstPage };
 };

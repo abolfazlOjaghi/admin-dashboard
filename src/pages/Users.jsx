@@ -1,7 +1,7 @@
 import { useFetch } from "../hooks/useFetch";
 import { getUsers } from "../services/requests/users";
 import UsersRow from "../components/user/UserRow";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import UserSkeleton from "../components/user/skeleton/UserSkeleton";
 import { USERS_LIMIT } from "../data/constans";
 import { usePagination } from "../hooks/usePagination";
@@ -16,6 +16,7 @@ const Users = () => {
     nextPage,
     prevPage,
     goToPage,
+    goFirstPage,
   } = usePagination(totalUsers, USERS_LIMIT);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,9 +25,18 @@ const Users = () => {
     return () => clearTimeout(timer);
   }, [searchValue]);
   const { data: users, isLoading } = useFetch(
-    () => getUsers({ limit: USERS_LIMIT, page: currentPage }),
-    ["users", currentPage],
+    () => getUsers({ limit: USERS_LIMIT, page: currentPage, search: debouncedSearch }),
+    ["users", currentPage, debouncedSearch],
   );
+  const prevSearch = useRef(debouncedSearch);
+
+useEffect(() => {
+  if (prevSearch.current !== "" && debouncedSearch === "") {
+    goToPage(1);
+  }
+
+  prevSearch.current = debouncedSearch;
+}, [debouncedSearch]);
   useEffect(() => {
     users?.total && setTotalUsers(users?.total);
   }, [users]);
@@ -60,7 +70,7 @@ const Users = () => {
               );
             })}
       </div>
-      <PaginatingControls
+      {!searchValue && <PaginatingControls
         pagesArray={pages}
         currentPage={currentPage}
         nextPage={nextPage}
@@ -68,7 +78,7 @@ const Users = () => {
         goToPage={goToPage}
         prevDisabled={users?.skip === 0}
         nextDisabled={users?.skip + users?.limit >= users?.total}
-      />
+      />}
     </div>
   );
 };
