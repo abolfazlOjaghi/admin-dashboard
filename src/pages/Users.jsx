@@ -40,6 +40,7 @@ useEffect(() => {
   useEffect(() => {
     users?.total && setTotalUsers(users?.total);
   }, [users]);
+
   return (
     <div className="page space-y-6">
       <h3>Users</h3>
@@ -66,6 +67,7 @@ useEffect(() => {
                   username={user.username}
                   image={user.image}
                   id={user.id}
+                  dependencyArray={["users", currentPage, debouncedSearch]}
                 />
               );
             })}

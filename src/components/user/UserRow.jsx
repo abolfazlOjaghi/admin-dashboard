@@ -1,13 +1,21 @@
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
-const UserRow = ({
-  firstName,
-  lastName,
-  username,
-  image,
-  id
-}) => {
-  const navigate = useNavigate() 
+import { useQueryClient } from "@tanstack/react-query";
+import { deleteUser } from "../../services/requests/users";
+const UserRow = ({ firstName, lastName, username, image, id, dependencyArray = [] }) => {
+  const queryClient = useQueryClient();
+  const handleDeleteUser = (userId) => {
+    // Local user delete
+    queryClient.setQueryData(dependencyArray, (oldData) => {
+      if (!oldData) return oldData;
+
+      return {
+        ...oldData,
+        users: oldData.users.filter((user) => user.id !== userId),
+      };
+    });
+  };
+  const navigate = useNavigate();
   return (
     <div className="bg-gray-100 dark:bg-zinc-900 rounded-xl px-12 py-4 space-y-4">
       <div className="flex justify-between items-center">
@@ -24,13 +32,21 @@ const UserRow = ({
             <span className="text-gray-500 font-semibold">@{username}</span>
           </div>
         </div>
-        <button
-          className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600 transition-all duration-100"
-          onClick={() => navigate(`/users/${id}`)}
-        >
-          <p>View Profile</p>
-          <ChevronRight/>
-        </button>
+        <div className="flex gap-x-3 *:transition-all *:duration-100">
+          <button
+            className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600"
+            onClick={() => navigate(`/users/${id}`)}
+          >
+            <p>View Profile</p>
+            <ChevronRight />
+          </button>
+          <button
+            onClick={() => handleDeleteUser(id)}
+            className="hover:bg-red-600 hover:text-white text-red-600 border-2 border-red-600 px-6 py-1.5 rounded-xl text-lg font-medium cursor-pointer"
+          >
+            Delete User
+          </button>
+        </div>
       </div>
     </div>
   );

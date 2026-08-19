@@ -98,6 +98,7 @@ const Home = () => {
                     lastName={user.lastName}
                     username={user.username}
                     image={user.image}
+                    dependencyArray={["home-users"]}
                   />
                 );
               })}
