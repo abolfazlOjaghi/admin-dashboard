@@ -10,7 +10,7 @@ import Badge from "../../components/products/Badge";
 import { getUsers } from "../../services/requests/users";
 import UserRow from "../../components/user/UserRow";
 import { useFetch } from "../../hooks/useFetch";
-import { getAllComments } from "../../services/requests/comments";
+import { getComments } from "../../services/requests/comments";
 import Comment from "../../components/comment/Comment";
 import { getLatests } from "../../utils/getLatests";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
@@ -35,7 +35,7 @@ const Home = () => {
     data: comments,
     isLoading: commentsLoading,
     isError: commentsError,
-  } = useFetch(getAllComments, ["comments"]);
+  } = useFetch(getComments, ["comments"]);
   const latestComments = getLatests(comments?.comments);
   const latestUsers = getLatests(usersData?.users);
   return (

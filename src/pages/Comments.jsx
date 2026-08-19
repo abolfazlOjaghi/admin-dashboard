@@ -1,5 +1,5 @@
 import { useFetch } from "../hooks/useFetch";
-import { getPaginationComments } from "../services/requests/comments";
+import { getComments } from "../services/requests/comments";
 import Comment from "../components/comment/Comment";
 import { useState, useEffect } from "react";
 import { COMMENTS_LIMIT } from "../data/constans";
@@ -16,7 +16,10 @@ const Comments = () => {
     goToPage,
   } = usePagination(totalComments, COMMENTS_LIMIT);
   const { data: comments, isLoading } = useFetch(
-    () => getPaginationComments(currentPage, COMMENTS_LIMIT),
+    () => getComments({
+      page : currentPage,
+      limit : COMMENTS_LIMIT
+    }),
     ["comments", currentPage, COMMENTS_LIMIT],
   );
   useEffect(() => {
