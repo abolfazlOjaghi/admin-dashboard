@@ -3,9 +3,20 @@ import { getUsers } from "../services/requests/users";
 import UsersRow from "../components/user/UserRow";
 import { useState, useEffect } from "react";
 import UserSkeleton from "../components/user/skeleton/UserSkeleton";
+import { USERS_LIMIT } from "../data/constans";
+import { usePagination } from "../hooks/usePagination";
+import PaginatingControls from "../components/paginationControls";
 const Users = () => {
   const [searchValue, setSearchValue] = useState();
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [totalUsers, setTotalUsers] = useState(0);
+  const {
+    page: currentPage,
+    pages,
+    nextPage,
+    prevPage,
+    goToPage,
+  } = usePagination(totalUsers, USERS_LIMIT);
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchValue);
@@ -13,9 +24,12 @@ const Users = () => {
     return () => clearTimeout(timer);
   }, [searchValue]);
   const { data: users, isLoading } = useFetch(
-    () => getUsers(debouncedSearch),
-    ["users", debouncedSearch],
+    () => getUsers({ limit: USERS_LIMIT, page: currentPage }),
+    ["users", currentPage],
   );
+  useEffect(() => {
+    users?.total && setTotalUsers(users?.total);
+  }, [users]);
   return (
     <div className="page space-y-6">
       <h3>Users</h3>
@@ -29,23 +43,32 @@ const Users = () => {
         />
       </div>
       <div>
-        {isLoading ? (
-          Array.from({ length: 10 }).map((_, index) => <UserSkeleton key={index} />)
-        ) : (
-          users?.users.map((user) => {
-            return (
-              <UsersRow
-                key={user.id}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                username={user.username}
-                image={user.image}
-                id={user.id}
-              />
-            );
-          })
-        )}
+        {isLoading
+          ? Array.from({ length: 10 }).map((_, index) => (
+              <UserSkeleton key={index} />
+            ))
+          : users?.users.map((user) => {
+              return (
+                <UsersRow
+                  key={user.id}
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  username={user.username}
+                  image={user.image}
+                  id={user.id}
+                />
+              );
+            })}
       </div>
+      <PaginatingControls
+        pagesArray={pages}
+        currentPage={currentPage}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        goToPage={goToPage}
+        prevDisabled={users?.skip === 0}
+        nextDisabled={users?.skip + users?.limit >= users?.total}
+      />
     </div>
   );
 };
