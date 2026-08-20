@@ -1,7 +1,7 @@
 import apiRequests from "../config/axios";
 export const getProducts = async (search = "", category = "") => {
   const url = search
-    ? `/products/search?q=${search}&limit=0`
+    ? `/products/search?q=${encodeURIComponent(search)}&limit=0`
     : "/products?limit=0";
   const { data } = await apiRequests.get(url);
   if (category) {

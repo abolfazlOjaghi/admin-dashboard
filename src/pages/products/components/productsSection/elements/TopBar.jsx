@@ -20,7 +20,7 @@ const TopBar = ({ search, searchInputChange, productsView, productsViewToggle, c
           <option value="">All</option>
                   {
           categories.map(category => {
-            return <option className="font-medium text-gray-800 dark:text-gray-100 " value={category.slug}>{category.name}</option>
+            return <option className="font-medium text-gray-800 dark:text-gray-100 " key={category.id} value={category.slug}>{category.name}</option>
           })
         }
         </select>

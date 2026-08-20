@@ -1,11 +1,8 @@
-import { TableOfContents, LayoutGrid } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { getCategories, getProducts } from "../../services/requests/products";
 import ProductsSection from "./components/productsSection/ProductsSection";
 import TopBar from "./components/productsSection/elements/TopBar";
-import ProductRowSkeleton from "../../components/products/skeleton/ProductRowSkeleton";
-import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 const Products = () => {
   const [productsView, setProductsView] = useLocalStorage(

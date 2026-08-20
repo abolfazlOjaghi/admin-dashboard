@@ -13,7 +13,7 @@ export const getUsers = async (
       ? "/users?limit=0"
       : !obj.search
         ? `/users?limit=${obj.limit}&skip=${skip}`
-        : `/users/search?q=${obj.search}&limit=0`;
+        : `/users/search?q=${encodeURIComponent(obj.search)}&limit=0`;
   const { data } = await apiRequests(url);
   return data;
 };

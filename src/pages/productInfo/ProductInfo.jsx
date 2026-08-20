@@ -12,7 +12,7 @@ const ProductsInfo = () => {
   );
   return (
     <div className="page space-y-3">
-      <BackButton/>
+      <BackButton />
       <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
         <div className="flex items-center">
           <img src={data?.thumbnail} alt="" />
@@ -35,6 +35,7 @@ const ProductsInfo = () => {
               {data?.reviews.map((review) => {
                 return (
                   <Comment
+                    key={review.id}
                     body={review.comment}
                     fullName={review.reviewerName}
                     email={review.reviewerEmail}

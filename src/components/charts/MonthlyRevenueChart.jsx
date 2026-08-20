@@ -10,7 +10,6 @@ import {
   Bar,
 } from "recharts";
 import { monthlyRevenue } from "../../mocks/monthlyRevenue";
-import { Divide } from "lucide-react";
 import clsx from "clsx";
 const MonthlyRevenueChart = ({ chartType, switchChartMode }) => {
   return (

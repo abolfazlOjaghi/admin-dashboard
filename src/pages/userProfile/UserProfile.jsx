@@ -22,7 +22,7 @@ const UserProfile = () => {
                         {
                             personalInfoFields.map(info => {
                                 return (
-                                    <InfoRow label={info.label} value={user?.[info.key]}/>
+                                    <InfoRow key={info.id} label={info.label} value={user?.[info.key]}/>
                                 )
                             })
                         }
@@ -32,7 +32,7 @@ const UserProfile = () => {
                         {
                            addressFields.map(address => {
                             return (
-                                <InfoRow label={address.label} value={user?.address[address.key]}/>
+                                <InfoRow key={address.id} label={address.label} value={user?.address[address.key]}/>
                             )
                            }) 
                         }

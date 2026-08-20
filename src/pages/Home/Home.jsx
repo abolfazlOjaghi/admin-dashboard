@@ -114,6 +114,7 @@ const Home = () => {
             : latestComments.map((comment) => {
                 return (
                   <Comment
+                    key={comment.id}
                     body={comment.body}
                     fullName={comment.user.fullName}
                     username={comment.user.username}

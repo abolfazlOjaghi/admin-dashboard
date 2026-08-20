@@ -7,7 +7,7 @@ const SideBar = () => {
       <p></p>
       <ul className="w-full flex flex-col gap-y-6 justify-center">
         {sideBarItems.map((item) => {
-          return <SideBarItem {...item} />;
+          return <SideBarItem key={item.id} {...item} />;
         })}
       </ul>
     </aside>

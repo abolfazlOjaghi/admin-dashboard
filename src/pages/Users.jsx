@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from "react";
 import UserSkeleton from "../components/user/skeleton/UserSkeleton";
 import { USERS_LIMIT } from "../data/constans";
 import { usePagination } from "../hooks/usePagination";
-import PaginatingControls from "../components/paginationControls";
+import PaginatingControls from "../components/PaginationControls";
 const Users = () => {
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [totalUsers, setTotalUsers] = useState(0);
   const {

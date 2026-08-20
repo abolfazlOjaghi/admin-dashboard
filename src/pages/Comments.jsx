@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { COMMENTS_LIMIT } from "../data/constans";
 import CommentSkeleton from "../components/comment/skeleton/CommentSkeleton";
 import { usePagination } from "../hooks/usePagination";
-import PaginatingControls from "../components/paginationControls";
+import PaginatingControls from "../components/PaginationControls";
 const Comments = () => {
   const [totalComments, setTotalComments] = useState(0);
   const {
@@ -16,10 +16,11 @@ const Comments = () => {
     goToPage,
   } = usePagination(totalComments, COMMENTS_LIMIT);
   const { data: comments, isLoading } = useFetch(
-    () => getComments({
-      page : currentPage,
-      limit : COMMENTS_LIMIT
-    }),
+    () =>
+      getComments({
+        page: currentPage,
+        limit: COMMENTS_LIMIT,
+      }),
     ["comments", currentPage, COMMENTS_LIMIT],
   );
   useEffect(() => {
@@ -31,9 +32,11 @@ const Comments = () => {
         <h3>Comments</h3>
         <div className="space-y-4">
           {isLoading
-            ? Array.from({ length: 10 }).map(() => {
-                return <CommentSkeleton />;
-              })
+            ? Array.from({ length: 10 }, (_, index) => index + 1).map(
+                (item) => {
+                  return <CommentSkeleton key={item} />;
+                },
+              )
             : comments?.comments.map((comment) => {
                 return (
                   <Comment
