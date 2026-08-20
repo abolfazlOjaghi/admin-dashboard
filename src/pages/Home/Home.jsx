@@ -115,10 +115,12 @@ const Home = () => {
                 return (
                   <Comment
                     key={comment.id}
+                    id={comment.id}
                     body={comment.body}
                     fullName={comment.user.fullName}
                     username={comment.user.username}
                     likes={comment.likes}
+                    dependencyArray={["comments"]}
                   />
                 );
               })}
