@@ -21,9 +21,3 @@ export const getUserById = async (userId) => {
   const { data } = await apiRequests(`/users/${userId}`);
   return data;
 };
-export const deleteUser = async (userId) => {
-  const { data } = await apiRequests(`users/${userId}`, {
-    method : "DELETE"
-  })
-  return data
-}

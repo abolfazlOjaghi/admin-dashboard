@@ -41,10 +41,12 @@ const Comments = () => {
                 return (
                   <Comment
                     key={comment.id}
+                    id={comment.id}
                     body={comment.body}
                     likes={comment.likes}
                     fullName={comment.user.fullName}
                     username={comment.user.username}
+                    dependencyArray={["comments", currentPage, COMMENTS_LIMIT]}
                   />
                 );
               })}

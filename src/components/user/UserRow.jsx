@@ -1,8 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteUser } from "../../services/requests/users";
 import { toast } from "sonner";
+import DeleteButton from "../ui/DeleteButton";
 const UserRow = ({ firstName, lastName, username, image, id, dependencyArray = [] }) => {
   const queryClient = useQueryClient();
   const handleDeleteUser = (userId) => {
@@ -47,12 +47,13 @@ const UserRow = ({ firstName, lastName, username, image, id, dependencyArray = [
             <p>View Profile</p>
             <ChevronRight />
           </button>
-          <button
+          {/* <button
             onClick={() => handleDeleteUser(id)}
             className="hover:bg-red-600 hover:text-white text-red-600 border-2 border-red-600 px-6 py-1.5 rounded-xl text-lg font-medium cursor-pointer"
           >
             Delete User
-          </button>
+          </button> */}
+          <DeleteButton click={() => handleDeleteUser(id)}>Delete User</DeleteButton>
         </div>
       </div>
     </div>
