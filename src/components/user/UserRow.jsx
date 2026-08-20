@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteUser } from "../../services/requests/users";
+import { toast } from "sonner";
 const UserRow = ({ firstName, lastName, username, image, id, dependencyArray = [] }) => {
   const queryClient = useQueryClient();
   const handleDeleteUser = (userId) => {
@@ -14,6 +15,12 @@ const UserRow = ({ firstName, lastName, username, image, id, dependencyArray = [
         users: oldData.users.filter((user) => user.id !== userId),
       };
     });
+    toast.success(
+      <div>
+        <p className="font-medium">User removed</p>
+        <p className="text-xs text-gray-500">Demo only — changes are not persisted!</p>
+      </div>
+    );
   };
   const navigate = useNavigate();
   return (
