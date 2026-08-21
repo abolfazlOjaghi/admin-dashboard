@@ -18,11 +18,7 @@ const Products = () => {
     }, 700);
     return () => clearTimeout(timer);
   }, [search]);
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useFetch(
+  const { data: products } = useFetch(
     () => getProducts(debouncedSearch, selectedCategory),
     ["products", debouncedSearch, selectedCategory],
   );
@@ -34,7 +30,7 @@ const Products = () => {
         <ProductsSection
           products={products}
           productsView={productsView}
-          isLoading={isLoading}
+          dependencyArray={["products", debouncedSearch, selectedCategory]}
         >
           <TopBar
             search={search}

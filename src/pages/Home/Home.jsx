@@ -70,12 +70,14 @@ const Home = () => {
               return (
                 <ProductCard
                   key={product.id}
+                  id={product.id}
                   infoRoot={`/products/${product.id}`}
                   image={product.images[0]}
                   title={product.title}
                   price={product.price}
                   rating={product.rating}
                   children={<Badge text={product.text} color={product.color} />}
+                  dependencyArray={["products"]}
                 />
               );
             })
