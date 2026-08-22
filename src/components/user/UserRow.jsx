@@ -1,7 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import DeleteModal from "../DeleteModal";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 const UserRow = ({
@@ -12,7 +11,7 @@ const UserRow = ({
   id,
   dependencyArray,
 }) => {
-  const deleteUser = useDeleteItem(dependencyArray, "users", "user");
+  const {deleteItem : deleteUser, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "users", "User", id);
   const navigate = useNavigate();
   return (
     <div className="bg-gray-100 dark:bg-zinc-900 rounded-xl px-12 py-4 space-y-4">
@@ -38,9 +37,12 @@ const UserRow = ({
             <p>View Profile</p>
             <ChevronRight />
           </button>
-          <DeleteButton click={() => deleteUser(id)}>Delete User</DeleteButton>
+          <DeleteButton padding="px-6" click={toggleModal}>
+            Delete User
+          </DeleteButton>
         </div>
       </div>
+      {isModalOpen && <DeleteModal item="user" handleDelete={deleteUser} cancel={toggleModal}/>}
     </div>
   );
 };

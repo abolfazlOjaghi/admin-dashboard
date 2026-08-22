@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
+import DeleteModal from "../DeleteModal";
 const ProductRow = ({
   image,
   title,
@@ -12,7 +13,7 @@ const ProductRow = ({
   dependencyArray,
 }) => {
   const navigate = useNavigate();
-  const deleteProduct = useDeleteItem(dependencyArray, "products", "Product");
+  const {deleteItem : deleteProduct, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "products", "Product", id);
   return (
     <div
       className="w-full flex items-center bg-gray-100 dark:bg-zinc-950 rounded-xl gap-x-4 pr-32 cursor-pointer"
@@ -26,7 +27,7 @@ const ProductRow = ({
         </div>
         <div className="flex items-center gap-x-4">
           <span className="text-3xl font-semibold">{price}$</span>
-          <DeleteButton click={() => deleteProduct(id)}>
+          <DeleteButton padding="px-6" click={toggleModal}>
             Delete Product
           </DeleteButton>
           <Link to={infoRoot}>
@@ -41,6 +42,7 @@ const ProductRow = ({
           </Link>
         </div>
       </div>
+      {isModalOpen && <DeleteModal item="product" handleDelete={deleteProduct} cancel={toggleModal}/>}
     </div>
   );
 };

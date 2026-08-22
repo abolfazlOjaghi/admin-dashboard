@@ -1,6 +1,7 @@
 import { CircleUserRound, ThumbsUp, Star } from "lucide-react";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
+import DeleteModal from "../DeleteModal";
 const Comment = ({
   body,
   likes = "",
@@ -11,7 +12,7 @@ const Comment = ({
   id,
   dependencyArray,
 }) => {
-  const deleteComment = useDeleteItem(dependencyArray, "comments", "Comment");
+  const {deleteItem : deleteComment, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "comments", "Comment", id);
   return (
     <div className="rounded-xl pl-4 pr-12 py-2 dark:bg-zinc-900 bg-gray-50 space-y-4 flex justify-between items-center">
       <div>
@@ -41,9 +42,10 @@ const Comment = ({
           </div>
         </div>
       </div>
-      <DeleteButton click={() => deleteComment(id)}>
+      <DeleteButton padding="px-6" click={toggleModal}>
         Delete Comment
       </DeleteButton>
+      {isModalOpen && <DeleteModal item="comment" handleDelete={deleteComment} cancel={toggleModal}/>}
     </div>
   );
 };

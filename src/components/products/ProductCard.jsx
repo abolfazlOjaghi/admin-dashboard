@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
+import { useState } from "react";
+import DeleteModal from "../DeleteModal";
 const ProductCard = ({
   children,
   image,
@@ -12,7 +14,7 @@ const ProductCard = ({
   dependencyArray,
 }) => {
   const navigate = useNavigate();
-  const deleteProduct = useDeleteItem(dependencyArray, "products", "Product");
+  const {deleteItem : deleteProduct, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "products", "Product", id);
   return (
     <div
       className="rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 pb-4 relative cursor-pointer"
@@ -29,10 +31,11 @@ const ProductCard = ({
         <button className=" bg-blue-600  text-white border-2 border-blue-600 px-6 py-1.5 rounded-xl text-lg font-medium cursor-pointer hover:bg-blue-800 transition-all duration-75">
           Info
         </button>
-        <DeleteButton click={() => deleteProduct(id)}>
+        <DeleteButton click={toggleModal}>
           Delete Product
         </DeleteButton>
       </div>
+      {isModalOpen && <DeleteModal item="product" handleDelete={deleteProduct} cancel={toggleModal}/>}
     </div>
   );
 };
