@@ -12,12 +12,10 @@ const ProductRow = ({
   id,
   dependencyArray,
 }) => {
-  const navigate = useNavigate();
   const {deleteItem : deleteProduct, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "products", "Product", id);
   return (
     <div
       className="w-full flex items-center bg-gray-100 dark:bg-zinc-950 rounded-xl gap-x-4 pr-32 cursor-pointer"
-      onClick={() => navigate(infoRoot)}
     >
       <img src={image} className="size-52" />
       <div className="flex justify-between w-full items-center">
