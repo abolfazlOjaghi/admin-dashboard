@@ -4,7 +4,7 @@ import { getUserById } from "../../services/requests/users";
 import { personalInfoFields, addressFields } from "../../data/userInfoFields";
 import InfoRow from "./components/InfoRow";
 import BackButton from "../../components/ui/BackButton";
-const UserProfile = () => {
+const UserProfilePage = () => {
   const { userId } = useParams();
   const { data: user } = useFetch(() => getUserById(userId), ["user", userId]);
   const emailField = personalInfoFields.find((item) => item.key === "email");
@@ -64,4 +64,4 @@ const UserProfile = () => {
     </div>
   );
 };
-export default UserProfile;
+export default UserProfilePage;
