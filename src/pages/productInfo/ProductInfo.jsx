@@ -4,6 +4,7 @@ import { getSingleProduct } from "../../services/requests/products";
 import Details from "./components/Details";
 import Comment from "../../components/comment/Comment";
 import BackButton from "../../components/ui/BackButton";
+import ProductInfoPageSkeleton from "./skeleton/ProductInfoPageSkeleton";
 const ProductsInfo = () => {
   const { productId } = useParams();
   const { data, isLoading, isError } = useFetch(
@@ -13,7 +14,11 @@ const ProductsInfo = () => {
   return (
     <div className="page space-y-3">
       <BackButton />
-      <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
+      {
+        isLoading ? (
+          <ProductInfoPageSkeleton/>
+        ) : (
+                <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
         <div className="flex items-center">
           <img src={data?.thumbnail} alt="" />
           <div className="space-y-4">
@@ -50,6 +55,8 @@ const ProductsInfo = () => {
           </div>
         </div>
       </section>
+        )
+      }
     </div>
   );
 };
