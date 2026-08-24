@@ -4,14 +4,19 @@ import { getUserById } from "../../services/requests/users";
 import { personalInfoFields, addressFields } from "../../data/userInfoFields";
 import InfoRow from "./components/InfoRow";
 import BackButton from "../../components/ui/BackButton";
+import UserProfilePageSkeleton from "./skeleton/UserProfilePageSkeleton";
 const UserProfilePage = () => {
   const { userId } = useParams();
-  const { data: user } = useFetch(() => getUserById(userId), ["user", userId]);
+  const { data: user, isLoading } = useFetch(() => getUserById(userId), ["user", userId]);
   const emailField = personalInfoFields.find((item) => item.key === "email");
   return (
     <div className="page space-y-3">
       <BackButton />
-      <section className="bg-gray-100 dark:bg-zinc-950 rounded-xl py-8 px-16">
+      {
+        isLoading ? (
+          <UserProfilePageSkeleton/>
+        ) : (
+                <section className="bg-gray-100 dark:bg-zinc-950 rounded-xl py-8 px-16">
         <div className="flex flex-col items-center justify-center">
           <img
             src={user?.image}
@@ -61,6 +66,8 @@ const UserProfilePage = () => {
           Send an email
         </button>
       </section>
+        )
+      }
     </div>
   );
 };
