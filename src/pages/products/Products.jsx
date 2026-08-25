@@ -4,6 +4,9 @@ import { getCategories, getProducts } from "../../services/requests/products";
 import ProductsSection from "./components/productsSection/ProductsSection";
 import TopBar from "./components/productsSection/elements/TopBar";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { usePagination } from "../../hooks/usePagination";
+import PaginatingControls from "../../components/PaginationControls";
+import { PRODUCTS_LIMIT } from "../../data/constans";
 const Products = () => {
   const [productsView, setProductsView] = useLocalStorage(
     "productsView",
@@ -12,6 +15,14 @@ const Products = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [productsTotal, setProductsTotal] = useState("");
+  const {
+    page: currentPage,
+    pages,
+    nextPage,
+    prevPage,
+    goToPage,
+  } = usePagination(productsTotal, PRODUCTS_LIMIT);
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -19,18 +30,32 @@ const Products = () => {
     return () => clearTimeout(timer);
   }, [search]);
   const { data: products } = useFetch(
-    () => getProducts(debouncedSearch, selectedCategory),
-    ["products", debouncedSearch, selectedCategory],
+    () =>
+      getProducts(
+        search || selectedCategory
+          ? {
+              search: debouncedSearch,
+              category: selectedCategory,
+            }
+          : {
+              page: currentPage,
+              limit: 30,
+            },
+      ),
+    ["products", debouncedSearch, selectedCategory, currentPage],
   );
+  useEffect(() => {
+    products && setProductsTotal(products.total);
+  }, [products]);
   const { data: categories } = useFetch(getCategories, ["categories"]);
   return (
-    <div className="page">
+    <div className="page space-y-6">
       <section>
         <h3>Products</h3>
         <ProductsSection
           products={products}
           productsView={productsView}
-          dependencyArray={["products", debouncedSearch, selectedCategory]}
+          dependencyArray={["products", debouncedSearch, selectedCategory, currentPage]}
         >
           <TopBar
             search={search}
@@ -45,6 +70,15 @@ const Products = () => {
           />
         </ProductsSection>
       </section>
+      {(!search && !selectedCategory) && <PaginatingControls
+        pagesArray={pages}
+        goToPage={goToPage}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        currentPage={currentPage}
+        prevDisabled={products?.skip === 0}
+        nextDisabled={products?.skip + products?.limit >= products?.total}
+      />}
     </div>
   );
 };

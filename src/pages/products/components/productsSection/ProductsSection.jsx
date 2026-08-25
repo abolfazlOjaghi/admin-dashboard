@@ -1,4 +1,3 @@
-import TopBar from "./elements/TopBar";
 import ProductCard from "../../../../components/products/ProductCard";
 import ProductRow from "../../../../components/products/ProductRow";
 import clsx from "clsx";
