@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
 import { getSingleProduct } from "../../services/requests/products";
 import Details from "./components/Details";
@@ -11,14 +11,17 @@ const ProductsInfo = () => {
     () => getSingleProduct(productId),
     [productId],
   );
+  if (isError) {
+    return <Navigate to="/404" replace/>
+  }
   return (
-    <div className="page space-y-3">
+    <div className="page space-y-3 min-h-screen">
       <BackButton />
       {
         isLoading ? (
           <ProductInfoPageSkeleton/>
         ) : (
-                <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
+        <section className="dark:bg-zinc-950 bg-gray-100 p-16 rounded-xl">
         <div className="flex items-center">
           <img src={data?.thumbnail} alt="" />
           <div className="space-y-4">
