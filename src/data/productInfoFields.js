@@ -1,15 +1,15 @@
 export const fields = [
-  { label: "Brand", key: "brand" },
-  { label: "Stock", key: "stock" },
-  { label: "Discount", key: "discountPercentage" },
-  { label: "Warranty", key: "warrantyInformation" },
-  { label: "Shipping", key: "shippingInformation" },
-  { label: "SKU", key : "sku" },
-  { label : "Category", key : "category" },
-  { label : "Rating", key : "rating" }
+  { id: 1, label: "Brand", key: "brand" },
+  { id: 2, label: "Stock", key: "stock" },
+  { id: 3, label: "Discount", key: "discountPercentage" },
+  { id: 4, label: "Warranty", key: "warrantyInformation" },
+  { id: 5, label: "Shipping", key: "shippingInformation" },
+  { id: 6, label: "SKU", key: "sku" },
+  { id: 7, label: "Category", key: "category" },
+  { id: 8, label: "Rating", key: "rating" },
 ];
 export const dimensionsFields = [
-    { label : "Width", key : "width" },
-    { label : "Height", key : "height" },
-    { label : "Depth", key : "depth" },
-]
+  { id: 1, label: "Width", key: "width" },
+  { id: 2, label: "Height", key: "height" },
+  { id: 3, label: "Depth", key: "depth" },
+];
