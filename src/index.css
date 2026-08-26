@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 .page {
-  @apply p-12 dark:bg-black dark:text-white *:space-y-10;
+  @apply p-12 dark:bg-black dark:text-white *:space-y-10 min-h-screen;
 }
 .page h3 {
   @apply text-3xl font-semibold;
@@ -11,9 +11,6 @@
 }
 .details p {
   @apply font-semibold text-lg;
-}
-.pagination-button {
-  @apply bg-blue-600 text-white rounded-xl font-medium px-6 py-2 disabled:bg-gray-500 disabled:cursor-not-allowed cursor-pointer;
 }
 * {
   user-select: none;
