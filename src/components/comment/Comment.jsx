@@ -12,40 +12,54 @@ const Comment = ({
   id,
   dependencyArray,
 }) => {
-  const {deleteItem : deleteComment, toggleModal, isModalOpen} = useDeleteItem(dependencyArray, "comments", "Comment", id);
+  const {
+    deleteItem: deleteComment,
+    toggleModal,
+    isModalOpen,
+  } = useDeleteItem(dependencyArray, "comments", "Comment", id);
+
   return (
-    <div className="rounded-xl pl-4 pr-12 py-2 dark:bg-zinc-900 bg-gray-50 space-y-4 flex justify-between items-center">
-      <div>
-        <div className="flex items-center gap-x-2">
-          <CircleUserRound size={40} />
+    <div className="rounded-xl px-5 py-4 dark:bg-zinc-900 bg-gray-50 border border-transparent dark:border-zinc-800 space-y-3">
+      <div className="flex items-start justify-between gap-x-4">
+        <div className="flex items-center gap-x-3">
+          <div className="bg-blue-600/10 text-blue-600 rounded-full p-1.5">
+            <CircleUserRound size={28} />
+          </div>
           <div>
-            <p className="font-medium text-lg">{fullName}</p>
-            <span className="text-gray-500 font-semibold">
+            <p className="font-medium">{fullName}</p>
+            <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
               {username ? `@${username}` : email}
             </span>
           </div>
         </div>
-        <div className="space-y-1.5">
-          <p className="text-lg font-medium">{body}</p>
-          <div className="flex items-center gap-x-1">
-            {likes !== "" ? (
-              <>
-                <ThumbsUp fill="#155dfc" color="#ccc" />
-                {likes}
-              </>
-            ) : (
-              <>
-                <Star color="#d08700" fill="#d08700" />
-                {rating}
-              </>
-            )}
-          </div>
-        </div>
+        <DeleteButton padding="px-4" click={toggleModal}>
+          Delete
+        </DeleteButton>
       </div>
-      <DeleteButton padding="px-6" click={toggleModal}>
-        Delete Comment
-      </DeleteButton>
-      {isModalOpen && <DeleteModal item="comment" handleDelete={deleteComment} cancel={toggleModal}/>}
+
+      <p className="font-medium leading-relaxed">{body}</p>
+
+      <div className="flex items-center gap-x-1.5 text-sm font-semibold">
+        {likes !== "" ? (
+          <>
+            <ThumbsUp size={16} fill="#155dfc" color="#155dfc" />
+            <span>{likes}</span>
+          </>
+        ) : (
+          <>
+            <Star size={16} color="#d08700" fill="#d08700" />
+            <span>{rating}</span>
+          </>
+        )}
+      </div>
+
+      {isModalOpen && (
+        <DeleteModal
+          item="comment"
+          handleDelete={deleteComment}
+          cancel={toggleModal}
+        />
+      )}
     </div>
   );
 };
