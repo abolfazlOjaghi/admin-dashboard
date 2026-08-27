@@ -37,7 +37,6 @@ const ProductsInfo = () => {
         <ProductInfoPageSkeleton />
       ) : (
         <div className="space-y-6">
-          {/* Hero */}
           <section className="dark:bg-zinc-950 bg-gray-100 rounded-2xl p-6 md:p-10">
             <div className="flex flex-col md:flex-row gap-8">
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 shrink-0 size-52 md:size-64 flex items-center justify-center mx-auto md:mx-0">

@@ -6,7 +6,7 @@ export const getProducts = async (obj = {
   limit : ""
 }) => {
   const skip = (obj.page - 1) * obj.limit
-  const url = (!obj.page && !obj.limit) ? (obj.search ? `/products/search?q=${encodeURIComponent(obj.search)}&limit=0` : "/products?limit=0") : `https://dummyjson.com/products?limit=${obj.limit}&skip=${skip}`
+  const url = (!obj.page && !obj.limit) ? (obj.search ? `/products/search?q=${encodeURIComponent(obj.search)}&limit=0` : "/products?limit=0") : `/products?limit=${obj.limit}&skip=${skip}`
   const { data } = await apiRequests.get(url);
   if (obj.category) {
     data.products = data.products.filter(
