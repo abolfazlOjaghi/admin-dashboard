@@ -9,6 +9,7 @@ const Input = forwardRef(
       label,
       error,
       reserveErrorSpace = false,
+      type = "text",
       ...props
     },
     ref,
@@ -16,7 +17,7 @@ const Input = forwardRef(
     const inputId = useId();
     return (
       <>
-        {label && <label htmlFor={inputId}>{label}</label>}
+        {label && <label htmlFor={inputId} className="text-black dark:text-white font-medium">{label}</label>}
         <div
           className={clsx(
             "relative flex-1",
@@ -26,7 +27,7 @@ const Input = forwardRef(
           {children}
           <input
             ref={ref}
-            type="text"
+            type={type}
             id={inputId}
             placeholder={placeholder}
             className={clsx(
