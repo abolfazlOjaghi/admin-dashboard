@@ -6,14 +6,18 @@ import InfoRow from "./components/InfoRow";
 import BackButton from "../../components/ui/BackButton";
 import UserProfilePageSkeleton from "./skeleton/UserProfilePageSkeleton";
 import { Mail, MapPin } from "lucide-react";
+import { Navigate } from "react-router";
 const UserProfilePage = () => {
   const { userId } = useParams();
-  const { data: user, isLoading } = useFetch(
-    () => getUserById(userId),
-    ["user", userId],
-  );
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useFetch(() => getUserById(userId), ["user", userId]);
   const emailField = personalInfoFields.find((item) => item.key === "email");
-
+  if (isError) {
+    return <Navigate to="/404" replace />;
+  }
   return (
     <div className="page space-y-3">
       <BackButton />
