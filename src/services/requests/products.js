@@ -1,16 +1,23 @@
 import apiRequests from "../config/axios";
-export const getProducts = async (obj = {
-  search : "",
-  category : "",
-  page : "",
-  limit : ""
-}) => {
-  const skip = (obj.page - 1) * obj.limit
-  const url = (!obj.page && !obj.limit) ? (obj.search ? `/products/search?q=${encodeURIComponent(obj.search)}&limit=0` : "/products?limit=0") : `/products?limit=${obj.limit}&skip=${skip}`
+export const getProducts = async (
+  obj = {
+    search: "",
+    category: "",
+    page: "",
+    limit: "",
+  },
+) => {
+  const skip = (obj.page - 1) * obj.limit;
+  const url =
+    !obj.page && !obj.limit
+      ? obj.search
+        ? `/products/search?q=${encodeURIComponent(obj.search)}&limit=0`
+        : "/products?limit=0"
+      : `/products?limit=${obj.limit}&skip=${skip}`;
   const { data } = await apiRequests.get(url);
   if (obj.category) {
     data.products = data.products.filter(
-      product => product.category === obj.category,
+      (product) => product.category === obj.category,
     );
   }
   return data;
@@ -20,6 +27,10 @@ export const getSingleProduct = async (productId) => {
   return data;
 };
 export const getCategories = async () => {
-    const { data } = await apiRequests.get("/products/categories")
-    return data
-} 
+  const { data } = await apiRequests.get("/products/categories");
+  return data;
+};
+export const addProduct = async (newProductData) => {
+  const { data } = await apiRequests.post("/products/add", newProductData);
+  return data;
+};

@@ -1,7 +1,8 @@
 import { CircleUserRound, ThumbsUp, Star } from "lucide-react";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
-import DeleteModal from "../DeleteModal";
+import DeleteModal from "../modal/DeleteModal";
+import ModalContainer from "../../features/ModalContainer";
 const Comment = ({
   body,
   likes = "",
@@ -54,11 +55,13 @@ const Comment = ({
       </div>
 
       {isModalOpen && (
-        <DeleteModal
-          item="comment"
-          handleDelete={deleteComment}
-          cancel={toggleModal}
-        />
+        <ModalContainer cancel={toggleModal}>
+          <DeleteModal
+            handleDelete={deleteComment}
+            cancel={toggleModal}
+            item="comment"
+          />
+        </ModalContainer>
       )}
     </div>
   );

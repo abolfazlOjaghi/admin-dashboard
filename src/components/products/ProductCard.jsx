@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
-import DeleteModal from "../DeleteModal";
+import DeleteModal from "../modal/DeleteModal";
 import { Star } from "lucide-react";
+import ModalContainer from "../../features/ModalContainer";
 const ProductCard = ({
   children,
   image,
@@ -55,11 +56,9 @@ const ProductCard = ({
       </div>
 
       {isModalOpen && (
-        <DeleteModal
-          item="product"
-          handleDelete={deleteProduct}
-          cancel={toggleModal}
-        />
+        <ModalContainer cancel={toggleModal}>
+          <DeleteModal handleDelete={deleteProduct} cancel={toggleModal} item="product"/>
+        </ModalContainer>
       )}
     </div>
   );

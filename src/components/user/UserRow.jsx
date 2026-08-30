@@ -1,8 +1,9 @@
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
-import DeleteModal from "../DeleteModal";
+import DeleteModal from "../modal/DeleteModal";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
+import ModalContainer from "../../features/ModalContainer";
 const UserRow = ({
   firstName,
   lastName,
@@ -50,11 +51,9 @@ const UserRow = ({
         </div>
       </div>
       {isModalOpen && (
-        <DeleteModal
-          item="user"
-          handleDelete={deleteUser}
-          cancel={toggleModal}
-        />
+        <ModalContainer cancel={toggleModal}>
+          <DeleteModal handleDelete={deleteUser} cancel={toggleModal} item="user"/>
+        </ModalContainer>
       )}
     </div>
   );

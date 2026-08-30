@@ -12,6 +12,15 @@
 .details p {
   @apply font-semibold text-lg;
 }
+.product-topbar-button {
+  @apply flex items-center justify-center size-11 shrink-0 rounded-xl bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors;
+}
+.modal {
+  @apply dark:bg-zinc-950 bg-white rounded-2xl p-6 space-y-5 w-full max-w-sm mx-4 shadow-xl dark:text-white;
+}
+.modal-cancel-button {
+  @apply cursor-pointer bg-gray-100 dark:bg-zinc-800 rounded-xl transition-colors duration-150 py-2 px-4 border-2 border-gray-500 text-base font-medium hover:bg-gray-200 dark:hover:bg-zinc-700;
+}
 * {
   user-select: none;
 }

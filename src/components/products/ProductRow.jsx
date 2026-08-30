@@ -2,7 +2,8 @@ import { ChevronRight, Star } from "lucide-react";
 import { Link } from "react-router";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
-import DeleteModal from "../DeleteModal";
+import DeleteModal from "../modal/DeleteModal";
+import ModalContainer from "../../features/ModalContainer";
 const ProductRow = ({
   image,
   title,
@@ -54,11 +55,9 @@ const ProductRow = ({
       </div>
 
       {isModalOpen && (
-        <DeleteModal
-          item="product"
-          handleDelete={deleteProduct}
-          cancel={toggleModal}
-        />
+        <ModalContainer cancel={toggleModal}>
+          <DeleteModal handleDelete={deleteProduct} cancel={toggleModal} item="product"/>
+        </ModalContainer>
       )}
     </div>
   );

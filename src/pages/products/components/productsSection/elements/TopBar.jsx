@@ -1,5 +1,14 @@
-import { LayoutGrid, TableOfContents, Search, ChevronDown } from "lucide-react";
+import {
+  LayoutGrid,
+  TableOfContents,
+  Search,
+  ChevronDown,
+  Plus,
+} from "lucide-react";
 import Input from "../../../../../components/ui/Input";
+import { useState } from "react";
+import ModalContainer from "../../../../../features/ModalContainer";
+import AddModal from "../../../../../components/modal/AddModal";
 const TopBar = ({
   search,
   searchInputChange,
@@ -9,20 +18,28 @@ const TopBar = ({
   changeCategory,
   selectedCategory,
 }) => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   return (
     <div className="flex flex-wrap items-center gap-3 dark:bg-zinc-950 bg-gray-200 p-6 rounded-xl">
       <button
-        className="flex items-center justify-center size-11 shrink-0 rounded-xl bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors"
-        onClick={productsViewToggle}
-        aria-label="Toggle view"
+        className="product-topbar-button"
+        onClick={() => setIsAddModalOpen((prev) => !prev)}
       >
+        <Plus size={20} />
+      </button>
+      <button className="product-topbar-button" onClick={productsViewToggle}>
         {productsView === "grid" ? (
           <LayoutGrid size={20} />
         ) : (
           <TableOfContents size={20} />
         )}
       </button>
-      <Input searchValue={search} searchInputChange={searchInputChange}>
+      <Input
+        value={search}
+        onChange={searchInputChange}
+        placeholder="Search products..."
+        width="w-80"
+      >
         <Search
           size={18}
           className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -50,6 +67,11 @@ const TopBar = ({
           className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400"
         />
       </div>
+      {isAddModalOpen && (
+        <ModalContainer>
+          <AddModal cancel={() => setIsAddModalOpen(false)} />
+        </ModalContainer>
+      )}
     </div>
   );
 };

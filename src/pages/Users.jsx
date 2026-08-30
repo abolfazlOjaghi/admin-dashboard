@@ -51,7 +51,12 @@ const Users = () => {
     <div className="page space-y-6">
       <h3>Users</h3>
       <div className="dark:bg-zinc-950 bg-gray-200 rounded-lg py-4 px-8 shadow-md">
-        <Input searchValue={searchValue} searchInputChange={(e) => setSearchValue(e.target.value)}>
+        <Input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          width="w-80"
+          placeholder="Search Users..."
+        >
           <Search
             size={18}
             className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
