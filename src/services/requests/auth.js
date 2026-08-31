@@ -1,7 +1,7 @@
 import apiRequests from "../config/axios";
 
 export const loginRequest = async (userData) => {
-  const { data } = await apiRequests.post("/auth/login", {...userData, expiresInMins: 60});
+  const { data } = await apiRequests.post("/auth/login", {...userData, expiresInMins: 1});
   return data;
 };
 export const getMe = async () => {
