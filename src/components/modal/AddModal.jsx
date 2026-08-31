@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addProduct } from "../../services/requests/products";
 import { toast } from "sonner";
 import { fileToBase64 } from "../../utils/fileToBase64";
+import ModalCancelButton from "../ui/ModalCancelButton";
 const ImageInput = ({ label = "Product image", onChange, error }) => {
   const inputRef = useRef(null);
   const [preview, setPreview] = useState(null);
@@ -190,15 +191,9 @@ const AddModal = ({ cancel }) => {
         </div>
       </form>
       <div className="flex items-center gap-x-3 w-full *:flex-1">
+        <ModalCancelButton cancel={cancel} disabeld={isPending} disabeledStyles="disabled:opacity-50 disabled:cursor-not-allowed"/>
         <button
-          className="modal-cancel-button disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={cancel}
-          disabled={isPending}
-        >
-          Cancel
-        </button>
-        <button
-          className="rounded-xl py-1.5 hover:bg-emerald-600 hover:text-white text-emerald-600 transition-colors font-medium text-lg border-2 px-4 border-emerald-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-emerald-600"
+          className="rounded-xl py-1.5 hover:bg-emerald-600 hover:text-white text-emerald-600 transition-colors font-medium text-lg border-2  border-emerald-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-emerald-600"
           form="addProductForm"
           disabled={isPending}
         >

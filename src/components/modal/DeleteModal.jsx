@@ -1,5 +1,6 @@
 import DeleteButton from "../ui/DeleteButton";
 import { TriangleAlert } from "lucide-react";
+import ModalCancelButton from "../ui/ModalCancelButton";
 const DeleteModal = ({ handleDelete, cancel, item = "item" }) => {
   return (
     <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -15,12 +16,8 @@ const DeleteModal = ({ handleDelete, cancel, item = "item" }) => {
         </p>
       </div>
       <div className="flex items-center gap-x-3 w-full *:flex-1">
-        <button className="modal-cancel-button" onClick={cancel}>
-          Cancel
-        </button>
-        <DeleteButton padding="px-4" click={handleDelete}>
-          Delete
-        </DeleteButton>
+        <ModalCancelButton cancel={cancel} />
+        <DeleteButton click={handleDelete}>Delete</DeleteButton>
       </div>
     </div>
   );

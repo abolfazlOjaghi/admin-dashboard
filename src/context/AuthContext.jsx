@@ -43,7 +43,6 @@ const AuthProvider = ({ children }) => {
     setToken(null);
     queryClient.removeQueries({ queryKey: ["auth-me"] });
   };
-
   const isCheckingAuth = !!token && isLoading;
 
   return (
