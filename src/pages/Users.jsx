@@ -64,23 +64,39 @@ const Users = () => {
         </Input>
       </div>
       <div>
-        {isLoading
-          ? Array.from({ length: 10 }).map((_, index) => (
-              <UserSkeleton key={index} />
-            ))
-          : users?.users.map((user) => {
-              return (
-                <UsersRow
-                  key={user.id}
-                  firstName={user.firstName}
-                  lastName={user.lastName}
-                  username={user.username}
-                  image={user.image}
-                  id={user.id}
-                  dependencyArray={["users", currentPage, debouncedSearch]}
-                />
-              );
-            })}
+        {isLoading ? (
+          Array.from({ length: 10 }).map((_, index) => (
+            <UserSkeleton key={index} />
+          ))
+        ) : users?.users?.length > 0 ? (
+          users.users.map((user) => (
+            <UsersRow
+              key={user.id}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              username={user.username}
+              image={user.image}
+              id={user.id}
+              dependencyArray={["users", currentPage, debouncedSearch]}
+            />
+          ))
+        ) : (
+          <div className="min-h-72 flex flex-col items-center justify-center text-center">
+            <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
+              <span className="text-2xl">👤</span>
+            </div>
+
+            <h4 className="text-xl font-semibold">
+              {debouncedSearch ? "No users found" : "No users available"}
+            </h4>
+
+            <p className="text-gray-500 dark:text-gray-400 mt-1">
+              {debouncedSearch
+                ? "Try searching with a different name."
+                : "There are no users to display right now."}
+            </p>
+          </div>
+        )}
       </div>
       {!searchValue && (
         <PaginatingControls
