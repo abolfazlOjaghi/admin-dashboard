@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
 
 export const useFetch = (func, keys = []) => {
-    const { data, isLoading, isError } = useQuery({
-        queryKey : keys,
-        queryFn : func,
-        // retry : 5
-    })
-    return { data, isLoading, isError }
-}
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: keys,
+    queryFn: func,
+    retry: 3,
+  });
+  return { data, isLoading, isError, error, refetch };
+};

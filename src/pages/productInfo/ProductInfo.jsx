@@ -6,6 +6,7 @@ import Comment from "../../components/comment/Comment";
 import BackButton from "../../components/ui/BackButton";
 import ProductInfoPageSkeleton from "./skeleton/ProductInfoPageSkeleton";
 import { Star, Package, ShieldCheck } from "lucide-react";
+import ErrorState from "../../components/ErrorState";
 const StarRating = ({ rating = 0 }) => {
   const rounded = Math.round(rating);
   return (
@@ -14,7 +15,11 @@ const StarRating = ({ rating = 0 }) => {
         <Star
           key={i}
           size={16}
-          className={i < rounded ? "fill-amber-500 text-amber-500" : "text-gray-300 dark:text-zinc-700"}
+          className={
+            i < rounded
+              ? "fill-amber-500 text-amber-500"
+              : "text-gray-300 dark:text-zinc-700"
+          }
         />
       ))}
     </div>
@@ -23,12 +28,16 @@ const StarRating = ({ rating = 0 }) => {
 
 const ProductsInfo = () => {
   const { productId } = useParams();
-  const { data, isLoading, isError } = useFetch(
+  const { data, isLoading, isError, error, reFetch } = useFetch(
     () => getSingleProduct(productId),
     [productId],
   );
   if (isError) {
-    return <Navigate to="/404" replace />;
+    const status = error?.response?.status;
+    if (status === 404) {
+      return <Navigate to="/404" replace />;
+    }
+    return <ErrorState onRetry={reFetch} />;
   }
   return (
     <div className="page space-y-4 min-h-screen">
@@ -59,11 +68,15 @@ const ProductsInfo = () => {
                   )}
                 </div>
 
-                <h1 className="text-2xl md:text-3xl font-bold">{data?.title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold">
+                  {data?.title}
+                </h1>
 
                 <div className="flex items-center gap-x-2">
                   <StarRating rating={data?.rating} />
-                  <span className="text-sm font-semibold">{data?.rating?.toFixed(1)}</span>
+                  <span className="text-sm font-semibold">
+                    {data?.rating?.toFixed(1)}
+                  </span>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     ({data?.reviews?.length} reviews)
                   </span>
@@ -75,18 +88,24 @@ const ProductsInfo = () => {
 
                 <div className="flex flex-wrap gap-3 pt-2">
                   <div className="flex items-center gap-x-2 bg-white dark:bg-zinc-900 rounded-xl px-4 py-2.5">
-                    <span className="text-xl font-bold text-blue-600">{data?.price}$</span>
+                    <span className="text-xl font-bold text-blue-600">
+                      {data?.price}$
+                    </span>
                   </div>
                   <div className="flex items-center gap-x-2 bg-white dark:bg-zinc-900 rounded-xl px-4 py-2.5">
                     <Package size={16} className="text-gray-400" />
                     <span className="text-sm font-medium">
-                      {data?.stock > 0 ? `${data.stock} in stock` : "Out of stock"}
+                      {data?.stock > 0
+                        ? `${data.stock} in stock`
+                        : "Out of stock"}
                     </span>
                   </div>
                   {data?.warrantyInformation && (
                     <div className="flex items-center gap-x-2 bg-white dark:bg-zinc-900 rounded-xl px-4 py-2.5">
                       <ShieldCheck size={16} className="text-gray-400" />
-                      <span className="text-sm font-medium">{data.warrantyInformation}</span>
+                      <span className="text-sm font-medium">
+                        {data.warrantyInformation}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -97,7 +116,10 @@ const ProductsInfo = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 items-start">
             <section className="space-y-4">
               <h3 className="text-xl font-semibold">
-                Reviews <span className="text-gray-400 font-medium">({data?.reviews?.length})</span>
+                Reviews{" "}
+                <span className="text-gray-400 font-medium">
+                  ({data?.reviews?.length})
+                </span>
               </h3>
               <div className="space-y-3">
                 {data?.reviews.map((review) => (

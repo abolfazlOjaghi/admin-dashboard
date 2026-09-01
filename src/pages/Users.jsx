@@ -8,6 +8,7 @@ import { usePagination } from "../hooks/usePagination";
 import PaginatingControls from "../components/PaginationControls";
 import Input from "../components/ui/Input";
 import { Search } from "lucide-react";
+import ErrorState from "../components/ErrorState";
 const Users = () => {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -25,7 +26,11 @@ const Users = () => {
     }, 700);
     return () => clearTimeout(timer);
   }, [searchValue]);
-  const { data: users, isLoading } = useFetch(
+  const {
+    data: users,
+    isLoading,
+    refetch,
+  } = useFetch(
     () =>
       getUsers({
         limit: USERS_LIMIT,
@@ -46,7 +51,9 @@ const Users = () => {
   useEffect(() => {
     users?.total && setTotalUsers(users?.total);
   }, [users]);
-
+  if (isError) {
+    return <ErrorState onRetry={refetch} />;
+  }
   return (
     <div className="page space-y-6">
       <h3>Users</h3>

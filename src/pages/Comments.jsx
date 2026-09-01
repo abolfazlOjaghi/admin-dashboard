@@ -6,6 +6,7 @@ import { COMMENTS_LIMIT } from "../data/constans";
 import CommentSkeleton from "../components/comment/skeleton/CommentSkeleton";
 import { usePagination } from "../hooks/usePagination";
 import PaginatingControls from "../components/PaginationControls";
+import ErrorState from "../components/ErrorState";
 const Comments = () => {
   const [totalComments, setTotalComments] = useState(0);
   const {
@@ -15,7 +16,12 @@ const Comments = () => {
     prevPage,
     goToPage,
   } = usePagination(totalComments, COMMENTS_LIMIT);
-  const { data: comments, isLoading } = useFetch(
+  const {
+    data: comments,
+    isLoading,
+    isError,
+    refetch,
+  } = useFetch(
     () =>
       getComments({
         page: currentPage,
@@ -26,6 +32,9 @@ const Comments = () => {
   useEffect(() => {
     comments?.total && setTotalComments(comments?.total);
   }, [comments]);
+  if (isError) {
+    return <ErrorState onRetry={refetch} />;
+  }
   return (
     <div className="page">
       <section>

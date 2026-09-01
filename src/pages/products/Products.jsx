@@ -7,6 +7,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { usePagination } from "../../hooks/usePagination";
 import PaginatingControls from "../../components/PaginationControls";
 import { PRODUCTS_LIMIT } from "../../data/constans";
+import ErrorState from "../../components/ErrorState";
 const Products = () => {
   const [productsView, setProductsView] = useLocalStorage(
     "productsView",
@@ -29,7 +30,11 @@ const Products = () => {
     }, 700);
     return () => clearTimeout(timer);
   }, [search]);
-  const { data: products } = useFetch(
+  const {
+    data: products,
+    isError,
+    refetch,
+  } = useFetch(
     () =>
       getProducts(
         search || selectedCategory
@@ -48,6 +53,9 @@ const Products = () => {
     products && setProductsTotal(products.total);
   }, [products]);
   const { data: categories } = useFetch(getCategories, ["categories"]);
+  if (isError) {
+    return <ErrorState onRetry={refetch} />;
+  }
   return (
     <div className="page space-y-6">
       <section>
@@ -55,7 +63,12 @@ const Products = () => {
         <ProductsSection
           products={products}
           productsView={productsView}
-          dependencyArray={["products", debouncedSearch, selectedCategory, currentPage]}
+          dependencyArray={[
+            "products",
+            debouncedSearch,
+            selectedCategory,
+            currentPage,
+          ]}
         >
           <TopBar
             search={search}
@@ -70,15 +83,17 @@ const Products = () => {
           />
         </ProductsSection>
       </section>
-      {(!search && !selectedCategory) && <PaginatingControls
-        pagesArray={pages}
-        goToPage={goToPage}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        currentPage={currentPage}
-        prevDisabled={products?.skip === 0}
-        nextDisabled={products?.skip + products?.limit >= products?.total}
-      />}
+      {!search && !selectedCategory && (
+        <PaginatingControls
+          pagesArray={pages}
+          goToPage={goToPage}
+          nextPage={nextPage}
+          prevPage={prevPage}
+          currentPage={currentPage}
+          prevDisabled={products?.skip === 0}
+          nextDisabled={products?.skip + products?.limit >= products?.total}
+        />
+      )}
     </div>
   );
 };

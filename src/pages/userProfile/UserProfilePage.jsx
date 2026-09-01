@@ -7,16 +7,23 @@ import BackButton from "../../components/ui/BackButton";
 import UserProfilePageSkeleton from "./skeleton/UserProfilePageSkeleton";
 import { Mail, MapPin } from "lucide-react";
 import { Navigate } from "react-router";
+import ErrorState from "../../components/ErrorState";
 const UserProfilePage = () => {
   const { userId } = useParams();
   const {
     data: user,
     isLoading,
     isError,
+    error,
+    refetch,
   } = useFetch(() => getUserById(userId), ["user", userId]);
   const emailField = personalInfoFields.find((item) => item.key === "email");
   if (isError) {
-    return <Navigate to="/404" replace />;
+    const status = error?.response?.status;
+    if (status === 404) {
+      return <Navigate to="/404" replace />;
+    }
+    return <ErrorState onRetry={refetch} />;
   }
   return (
     <div className="page space-y-3">
