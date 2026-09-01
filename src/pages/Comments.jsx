@@ -19,7 +19,6 @@ const Comments = () => {
   const searchField = watch("searchField");
   const searchText = watch("searchText").trim();
   const isSearching = searchText.length > 0;
-
   const {
     page: currentPage,
     pages,
@@ -36,7 +35,7 @@ const Comments = () => {
   } = useFetch(
     () =>
       isSearching
-        ? getComments({}) // بدون page/limit → همه‌ی کامنت‌ها یه‌جا میان
+        ? getComments({})
         : getComments({ page: currentPage, limit: COMMENTS_LIMIT }),
     ["comments", isSearching ? "all" : currentPage, COMMENTS_LIMIT],
   );
@@ -135,9 +134,17 @@ const Comments = () => {
                 />
               ))}
           {isSearching && visibleComments?.length === 0 && (
-            <p className="text-center text-gray-500 dark:text-gray-400 py-10">
-              No comments match your search.
-            </p>
+            <div className="min-h-72 flex flex-col items-center justify-center text-center">
+              <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
+                <span className="text-2xl">💬</span>
+              </div>
+
+              <h4 className="text-xl font-semibold">No comments found</h4>
+
+              <p className="text-gray-500 dark:text-gray-400 mt-1">
+                Try searching with different words.
+              </p>
+            </div>
           )}
         </div>
 
