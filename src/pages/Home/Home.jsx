@@ -1,9 +1,7 @@
 import InfoSection from "../../features/InfoSection/InfoSection";
 import MonthlyRevenueChart from "../../components/charts/MonthlyRevenueChart";
 import MonthsInfo from "./components/MonthsInfo";
-import { useState, useEffect } from "react";
 import ProductCard from "../../components/products/ProductCard";
-import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../services/requests/products";
 import { getProductHighlights } from "../../utils/getProductHighlights";
 import Badge from "../../components/products/Badge";
