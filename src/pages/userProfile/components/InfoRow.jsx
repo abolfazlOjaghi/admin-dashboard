@@ -10,7 +10,7 @@ const InfoRow = ({ label, value }) => {
       <div className="flex items-center justify-between gap-x-3 px-4 py-2.5 rounded-lg bg-gray-100 dark:bg-zinc-800">
         <span className="text-sm font-medium truncate">{value || "-"}</span>
         <button
-          onClick={() => handleCopy(value)}
+          onClick={() => handleCopy(true, value)}
           disabled={!value}
           className="shrink-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 text-gray-400 hover:text-blue-600 transition-colors"
         >

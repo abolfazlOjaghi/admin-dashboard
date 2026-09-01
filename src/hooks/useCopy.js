@@ -1,10 +1,10 @@
 import { useState } from "react";
 export const useCopy = () => {
-    const [copied, setCopied] = useState(false);
-    const handleCopy = (value) => {
+    const [copied, setCopied] = useState(null);
+    const handleCopy = (key, value) => {
         if (!value) return;
         navigator.clipboard.writeText(value);
-        setCopied(true);
+        setCopied(key);
         setTimeout(() => setCopied(false), 2000);
     }
     return { copied, handleCopy };

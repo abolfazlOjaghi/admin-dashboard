@@ -8,7 +8,7 @@ import ProductInfo from "./pages/productInfo/ProductInfo";
 import NotFound from "./pages/NotFound";
 import UserProfile from "./pages/userProfile/UserProfilePage";
 import ProtectRoots from "./ProtectRoots";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 const routes = createBrowserRouter([
   {
     path: "/login",
