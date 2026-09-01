@@ -1,7 +1,7 @@
 import { useFetch } from "../hooks/useFetch";
 import { getUsers } from "../services/requests/users";
 import UsersRow from "../components/user/UserRow";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import UserSkeleton from "../components/user/skeleton/UserSkeleton";
 import { USERS_LIMIT } from "../data/constans";
 import { usePagination } from "../hooks/usePagination";
@@ -9,10 +9,12 @@ import PaginatingControls from "../components/PaginationControls";
 import Input from "../components/ui/Input";
 import { Search } from "lucide-react";
 import ErrorState from "../components/ErrorState";
+import { AuthContext } from "../context/AuthContext";
 const Users = () => {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [totalUsers, setTotalUsers] = useState(0);
+  const { user : currentUser } = useContext(AuthContext)
   const {
     page: currentPage,
     pages,
@@ -86,6 +88,7 @@ const Users = () => {
               image={user.image}
               id={user.id}
               dependencyArray={["users", currentPage, debouncedSearch]}
+              you={currentUser.username === user.username}
             />
           ))
         ) : (
