@@ -29,6 +29,7 @@ const Users = () => {
   const {
     data: users,
     isLoading,
+    isError,
     refetch,
   } = useFetch(
     () =>
