@@ -10,11 +10,14 @@ import Input from "../components/ui/Input";
 import { Search } from "lucide-react";
 import ErrorState from "../components/ErrorState";
 import { AuthContext } from "../context/AuthContext";
+import { useForm } from "react-hook-form";
 const Users = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [totalUsers, setTotalUsers] = useState(0);
-  const { user : currentUser } = useContext(AuthContext)
+  const { user: currentUser } = useContext(AuthContext);
+  const { register, watch } = useForm({ defaultValues: { search: "" } });
+  const searchValue = watch("search");
+
   const {
     page: currentPage,
     pages,
@@ -22,12 +25,14 @@ const Users = () => {
     prevPage,
     goToPage,
   } = usePagination(totalUsers, USERS_LIMIT);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchValue);
     }, 700);
     return () => clearTimeout(timer);
   }, [searchValue]);
+
   const {
     data: users,
     isLoading,
@@ -42,28 +47,29 @@ const Users = () => {
       }),
     ["users", currentPage, debouncedSearch],
   );
-  const prevSearch = useRef(debouncedSearch);
 
+  const prevSearch = useRef(debouncedSearch);
   useEffect(() => {
     if (prevSearch.current !== "" && debouncedSearch === "") {
       goToPage(1);
     }
-
     prevSearch.current = debouncedSearch;
   }, [debouncedSearch]);
+
   useEffect(() => {
     users?.total && setTotalUsers(users?.total);
   }, [users]);
+
   if (isError) {
     return <ErrorState onRetry={refetch} />;
   }
+
   return (
     <div className="page space-y-6">
       <h3>Users</h3>
       <div className="dark:bg-zinc-950 bg-gray-200 rounded-lg py-4 px-8 shadow-md">
         <Input
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          {...register("search")}
           width="w-80"
           placeholder="Search Users..."
         >
@@ -96,11 +102,9 @@ const Users = () => {
             <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
               <span className="text-2xl">👤</span>
             </div>
-
             <h4 className="text-xl font-semibold">
               {debouncedSearch ? "No users found" : "No users available"}
             </h4>
-
             <p className="text-gray-500 dark:text-gray-400 mt-1">
               {debouncedSearch
                 ? "Try searching with a different name."
