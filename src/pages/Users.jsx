@@ -11,6 +11,8 @@ import { Search } from "lucide-react";
 import ErrorState from "../components/ErrorState";
 import { AuthContext } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
+import EmptyResult from "../components/EmptyResult";
+import { UserRound } from "lucide-react";
 const Users = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [totalUsers, setTotalUsers] = useState(0);
@@ -98,19 +100,9 @@ const Users = () => {
             />
           ))
         ) : (
-          <div className="min-h-72 flex flex-col items-center justify-center text-center">
-            <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
-              <span className="text-2xl">👤</span>
-            </div>
-            <h4 className="text-xl font-semibold">
-              {debouncedSearch ? "No users found" : "No users available"}
-            </h4>
-            <p className="text-gray-500 dark:text-gray-400 mt-1">
-              {debouncedSearch
-                ? "Try searching with a different name."
-                : "There are no users to display right now."}
-            </p>
-          </div>
+          <EmptyResult item="user">
+            <UserRound size={32} />
+          </EmptyResult>
         )}
       </div>
       {!searchValue && (

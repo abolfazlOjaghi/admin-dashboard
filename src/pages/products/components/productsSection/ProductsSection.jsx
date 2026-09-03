@@ -3,6 +3,8 @@ import ProductRow from "../../../../components/products/ProductRow";
 import clsx from "clsx";
 import ProductCardSkeleton from "../../../../components/products/skeleton/ProductCardSkeleton";
 import ProductRowSkeleton from "../../../../components/products/skeleton/ProductRowSkeleton";
+import EmptyResult from "../../../../components/EmptyResult";
+import { SquareChartGantt } from "lucide-react";
 const ProductsSection = ({
   children,
   products,
@@ -44,17 +46,9 @@ const ProductsSection = ({
             })}
           </div>
         ) : (
-          <div className="min-h-72 flex flex-col items-center justify-center text-center">
-            <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
-              <span className="text-2xl">📦</span>
-            </div>
-
-            <h4 className="text-xl font-semibold">No products found</h4>
-
-            <p className="text-gray-500 dark:text-gray-400 mt-1">
-              Try changing your search or category.
-            </p>
-          </div>
+          <EmptyResult item="product">
+            <SquareChartGantt size={32} />
+          </EmptyResult>
         )
       ) : (
         <div

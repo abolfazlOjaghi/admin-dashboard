@@ -11,6 +11,8 @@ import Input from "../components/ui/Input";
 import { Search } from "lucide-react";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
+import { MessageSquare } from "lucide-react";
+import EmptyResult from "../components/EmptyResult";
 const Comments = () => {
   const [totalComments, setTotalComments] = useState(0);
   const { register, watch } = useForm({
@@ -134,17 +136,9 @@ const Comments = () => {
                 />
               ))}
           {isSearching && visibleComments?.length === 0 && (
-            <div className="min-h-72 flex flex-col items-center justify-center text-center">
-              <div className="size-16 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center mb-4">
-                <span className="text-2xl">💬</span>
-              </div>
-
-              <h4 className="text-xl font-semibold">No comments found</h4>
-
-              <p className="text-gray-500 dark:text-gray-400 mt-1">
-                Try searching with different words.
-              </p>
-            </div>
+            <EmptyResult item="comment">
+              <MessageSquare size={32} />
+            </EmptyResult>
           )}
         </div>
 
