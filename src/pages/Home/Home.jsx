@@ -15,17 +15,22 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import ProductCardSkeleton from "../../components/products/skeleton/ProductCardSkeleton";
 import CommentSkeleton from "../../components/comment/skeleton/CommentSkeleton";
 import UserSkeleton from "../../components/user/skeleton/UserSkeleton";
+import ErrorState from "../../components/ErrorState";
+import clsx from "clsx";
 const Home = () => {
   const [chartType, setChartType] = useLocalStorage("chartType", "line");
   const {
     data: productsData,
     isLoading: productsLoading,
-    isError,
+    isError: productsError,
+    refetch: refetchProducts,
   } = useFetch(() => getProducts(), ["products"]);
-  const { data: usersData, isLoading: usersLoading } = useFetch(
-    () => getUsers(),
-    ["home-users"],
-  );
+  const {
+    data: usersData,
+    isLoading: usersLoading,
+    isError: usersError,
+    refetch: usersRefetch,
+  } = useFetch(() => getUsers(), ["home-users"]);
   const highlights = productsData
     ? getProductHighlights(productsData.products)
     : [];
@@ -33,6 +38,7 @@ const Home = () => {
     data: comments,
     isLoading: commentsLoading,
     isError: commentsError,
+    refetch: commentsRefetch,
   } = useFetch(getComments, ["comments"]);
   const latestComments = getLatests(comments?.comments);
   const latestUsers = getLatests(usersData?.users);
@@ -60,7 +66,13 @@ const Home = () => {
       </section>
       <section>
         <h3>Product Highlights</h3>
-        <div className="grid grid-cols-4 gap-x-16">
+        <div
+          className={clsx(
+            !productsError
+              ? "grid grid-cols-4 gap-x-16"
+              : "flex justify-center",
+          )}
+        >
           {productsLoading ? (
             <ProductCardSkeleton num={4} />
           ) : (
@@ -79,6 +91,13 @@ const Home = () => {
                 />
               );
             })
+          )}
+          {productsError && (
+            <ErrorState
+              onRetry={refetchProducts}
+              home={false}
+              paddingY="py-4"
+            />
           )}
         </div>
       </section>
@@ -102,6 +121,9 @@ const Home = () => {
                   />
                 );
               })}
+          {usersError && (
+            <ErrorState onRetry={usersRefetch} home={false} paddingY="py-4" />
+          )}
         </div>
       </section>
       <section>
@@ -124,6 +146,13 @@ const Home = () => {
                   />
                 );
               })}
+          {commentsError && (
+            <ErrorState
+              onRetry={commentsRefetch}
+              home={false}
+              paddingY="py-4"
+            />
+          )}
         </div>
       </section>
     </div>
