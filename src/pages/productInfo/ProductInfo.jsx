@@ -28,7 +28,7 @@ const StarRating = ({ rating = 0 }) => {
 
 const ProductsInfo = () => {
   const { productId } = useParams();
-  const { data, isLoading, isError, error, reFetch } = useFetch(
+  const { data, isLoading, isError, error, refetch } = useFetch(
     () => getSingleProduct(productId),
     [productId],
   );
@@ -37,7 +37,7 @@ const ProductsInfo = () => {
     if (status === 404) {
       return <Navigate to="/404" replace />;
     }
-    return <ErrorState onRetry={reFetch} />;
+    return <ErrorState onRetry={refetch} />;
   }
   return (
     <div className="page space-y-4 min-h-screen">
