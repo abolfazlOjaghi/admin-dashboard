@@ -4,16 +4,22 @@ import { toast } from "sonner";
 export const useDeleteItem = (queryKey, dataKey, itemName, id) => {
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const deleteItem = () => {
     queryClient.setQueryData(queryKey, (oldData) => {
       if (!oldData) return oldData;
 
       return {
         ...oldData,
-        [dataKey]: oldData[dataKey].filter((item) => item.id !== id),
+        [dataKey]:
+          dataKey === "reviews"
+            ? oldData.reviews.filter((review) => review.comment !== id)
+            : oldData[dataKey].filter((item) => item.id !== id),
       };
     });
+
     setIsModalOpen(false);
+
     toast.success(
       <div>
         <p className="font-medium">{itemName} removed</p>
@@ -23,5 +29,10 @@ export const useDeleteItem = (queryKey, dataKey, itemName, id) => {
       </div>,
     );
   };
-  return {deleteItem, isModalOpen, toggleModal : () => setIsModalOpen(prev => !prev) };
+
+  return {
+    deleteItem,
+    isModalOpen,
+    toggleModal: () => setIsModalOpen((prev) => !prev),
+  };
 };

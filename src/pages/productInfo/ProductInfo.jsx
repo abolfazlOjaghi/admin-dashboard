@@ -124,11 +124,14 @@ const ProductsInfo = () => {
               <div className="space-y-3">
                 {data?.reviews.map((review) => (
                   <Comment
-                    key={review.id}
+                    key={review.comment}
+                    id={review.comment}
                     body={review.comment}
                     fullName={review.reviewerName}
                     email={review.reviewerEmail}
                     rating={review.rating}
+                    dependencyArray={[productId]}
+                    review={true}
                   />
                 ))}
               </div>

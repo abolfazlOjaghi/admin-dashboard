@@ -12,12 +12,18 @@ const Comment = ({
   rating = "",
   id,
   dependencyArray,
+  review = false,
 }) => {
-  const {
-    deleteItem: deleteComment,
-    toggleModal,
-    isModalOpen,
-  } = useDeleteItem(dependencyArray, "comments", "Comment", id);
+const {
+  deleteItem: deleteComment,
+  toggleModal,
+  isModalOpen,
+} = useDeleteItem(
+  dependencyArray,
+  review ? "reviews" : "comments",
+  "Comment",
+  id
+);
 
   return (
     <div className="rounded-xl px-5 py-4 dark:bg-zinc-900 bg-gray-50 border border-transparent dark:border-zinc-800 space-y-3">
