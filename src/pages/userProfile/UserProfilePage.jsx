@@ -8,6 +8,7 @@ import UserProfilePageSkeleton from "./skeleton/UserProfilePageSkeleton";
 import { Mail, MapPin } from "lucide-react";
 import { Navigate } from "react-router";
 import ErrorState from "../../components/ErrorState";
+import { USERNAME } from "../../data/constans";
 const UserProfilePage = () => {
   const { userId } = useParams();
   const {
@@ -25,6 +26,7 @@ const UserProfilePage = () => {
     }
     return <ErrorState onRetry={refetch} />;
   }
+  const you = user?.username === USERNAME;
   return (
     <div className="page space-y-3">
       <BackButton />
@@ -82,18 +84,20 @@ const UserProfilePage = () => {
             </div>
 
             <div className="flex justify-center">
-              <button
-                disabled={!user}
-                className="flex items-center gap-x-2 bg-blue-600 text-white rounded-full cursor-pointer py-2.5 px-6 font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                onClick={() => {
-                  if (user?.[emailField.key]) {
-                    window.location.href = `mailto:${user[emailField.key]}`;
-                  }
-                }}
-              >
-                <Mail size={18} />
-                Send an email
-              </button>
+              {!you && (
+                <button
+                  disabled={!user}
+                  className="flex items-center gap-x-2 bg-blue-600 text-white rounded-full cursor-pointer py-2.5 px-6 font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => {
+                    if (user?.[emailField.key]) {
+                      window.location.href = `mailto:${user[emailField.key]}`;
+                    }
+                  }}
+                >
+                  <Mail size={18} />
+                  Send an email
+                </button>
+              )}
             </div>
           </div>
         </section>
