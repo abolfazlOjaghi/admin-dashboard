@@ -50,8 +50,8 @@ const Home = () => {
         totalComments={comments?.total}
       />
       <section>
-        <h3 className="ml-14">Revenue Overview</h3>
-        <div className="flex gap-x-16 items-center">
+        <h3 className="2xl:ml-14 ml-4">Revenue Overview</h3>
+        <div className="flex max-2xl:flex-col gap-y-6 2xl:gap-x-8 2xl:items-center">
           <MonthlyRevenueChart
             chartType={chartType}
             switchChartMode={(e) => {
@@ -69,8 +69,8 @@ const Home = () => {
         <div
           className={clsx(
             !productsError
-              ? "grid grid-cols-4 gap-x-16"
-              : "flex justify-center",
+              ? "grid 2xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4"
+              : "flex justify-center max-sm:flex-col gap-y-2",
           )}
         >
           {productsLoading ? (

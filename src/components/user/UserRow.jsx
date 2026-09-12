@@ -24,13 +24,13 @@ const UserRow = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl px-6 md:px-10 py-4 shadow-sm hover:shadow-md transition-shadow duration-200",
+        "rounded-2xl px-4 xl:px-10 py-4 shadow-sm hover:shadow-md transition-shadow duration-200",
         you
           ? "border-2 border-blue-600 bg-blue-600/5"
           : "border border-gray-200 dark:border-zinc-800",
       )}
     >
-      <div className="flex flex-wrap gap-4 justify-between items-center">
+      <div className="flex max-xl:flex-col gap-4 justify-between xl:items-center">
         <div className="flex gap-x-4 items-center">
           <div className="relative shrink-0">
             <img
@@ -53,9 +53,9 @@ const UserRow = ({
             </span>
           </div>
         </div>
-        <div className="flex gap-x-3">
+        <div className="flex gap-3 max-sm:flex-col">
           <button
-            className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600"
+            className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600 max-sm:justify-center"
             onClick={() => navigate(`/users/${id}`)}
           >
             <p>{you ? "Your" : "View"} Profile</p>

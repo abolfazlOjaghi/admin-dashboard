@@ -11,7 +11,7 @@ const MonthsInfo = () => {
   return (
     <section className="flex-1 space-y-4">
       <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-zinc-800">
-        <ul className="grid grid-cols-3 font-semibold text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-zinc-900 px-8 py-3">
+        <ul className="grid grid-cols-3 font-semibold text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-zinc-900 px-4 sm:px-8 py-3">
           <li className="text-left">Month</li>
           <li className="text-center">Revenue</li>
           <li className="text-right">Changes</li>
@@ -20,9 +20,9 @@ const MonthsInfo = () => {
           {monthlyRevenueWithChanges.map(({ revenue, month, change }) => (
             <ul
               key={month}
-              className="grid grid-cols-3 px-8 py-3.5 font-medium hover:bg-gray-50 dark:hover:bg-zinc-900/60 transition-colors"
+              className="grid grid-cols-3 px-4 sm:px-8 py-3.5 font-medium hover:bg-gray-50 dark:hover:bg-zinc-900/60 transition-colors"
             >
-              <li className="text-left">{month}</li>
+              <li className="text-left truncate">{month}</li>
               <li className="text-center">{revenue}$</li>
               <li
                 className={clsx(
@@ -42,31 +42,37 @@ const MonthsInfo = () => {
         </div>
       </div>
 
-      <div className="rounded-2xl py-6 px-6 md:px-10 dark:bg-zinc-900 bg-gray-50 border border-gray-100 dark:border-zinc-800 flex flex-wrap justify-between items-center gap-6">
-        <div className="flex gap-x-4 items-center">
-          <div className="p-3.5 rounded-xl bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400">
-            <Trophy size={32} />
+      <div className="rounded-2xl py-6 px-4 xl:px-10 dark:bg-zinc-900 bg-gray-50 border border-gray-100 dark:border-zinc-800 flex flex-wrap xl:flex-nowrap justify-between items-center gap-x-4 gap-y-3">
+        <div className="flex gap-x-2 xl:gap-x-4 items-center min-w-0">
+          <div className="shrink-0 p-2 xl:p-3.5 rounded-xl bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400">
+            <Trophy size={28} className="xl:size-8" />
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="font-medium text-gray-500 dark:text-gray-400 text-sm">
               Best Month
             </p>
-            <p className="text-3xl font-bold">{BestMonth.month}</p>
+            <p className="text-2xl sm:text-3xl font-bold truncate">
+              {BestMonth.month}
+            </p>
           </div>
         </div>
 
-        <p className="text-4xl font-bold">{BestMonth.revenue}$</p>
+        <p className="text-2xl sm:text-4xl font-bold">{BestMonth.revenue}$</p>
 
         <p
           className={clsx(
-            "flex items-center gap-x-1.5 text-4xl font-bold",
+            "flex items-center gap-x-1 sm:gap-x-1.5 text-2xl sm:text-4xl font-bold",
             BestMonth.change > 0 && "text-green-600",
             BestMonth.change < 0 && "text-red-600",
             BestMonth.change === 0 && "text-gray-400",
           )}
         >
-          {BestMonth.change > 0 && <TrendingUp size={28} />}
-          {BestMonth.change < 0 && <TrendingDown size={28} />}
+          {BestMonth.change > 0 && (
+            <TrendingUp size={22} className="sm:size-7" />
+          )}
+          {BestMonth.change < 0 && (
+            <TrendingDown size={22} className="sm:size-7" />
+          )}
           {BestMonth.change > 0 ? `+${BestMonth.change}` : BestMonth.change}
           {BestMonth.change !== 0 && "%"}
         </p>

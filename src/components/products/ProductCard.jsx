@@ -51,7 +51,7 @@ const ProductCard = ({
           <button className="bg-blue-600 text-white border-2 border-blue-600 px-4 py-1.5 rounded-xl text-base font-medium cursor-pointer hover:bg-blue-700 transition-colors">
             Info
           </button>
-          <DeleteButton click={toggleModal}>Delete Product</DeleteButton>
+          <DeleteButton click={toggleModal}>Delete</DeleteButton>
         </div>
       </div>
 

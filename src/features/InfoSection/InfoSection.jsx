@@ -2,7 +2,7 @@ import InfoCard from "./components/InfoCard";
 import { UserRound, SquareChartGantt, MessageCircle, DollarSign } from "lucide-react";
 const InfoSection = ({ totalComments, totalUsers, totalProducts }) => {
   return (
-    <section className="grid grid-cols-4 gap-x-12">
+    <section className="grid 2xl:grid-cols-4 sm:grid-cols-2 lg:gap-x-6 gap-x-2 grid-cols-1">
         <InfoCard title="Total Revenue" value="$74,910" icon={DollarSign} link="/" />
         <InfoCard
           title="Total Users"

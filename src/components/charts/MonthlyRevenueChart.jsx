@@ -26,8 +26,8 @@ const ChartTooltip = ({ active, payload }) => {
 
 const MonthlyRevenueChart = ({ chartType, switchChartMode }) => {
   return (
-    <section className="w-[50%] space-y-5">
-      <div className="space-x-3 *:rounded-xl *:px-6 *:py-1 font-semibold ml-14 *:cursor-pointer">
+    <section className="2xl:w-[50%] space-y-5">
+      <div className="space-x-3 *:rounded-xl *:px-6 *:py-1 font-semibold 2xl:ml-14 ml-4 *:cursor-pointer">
         <button
           name="line"
           onClick={switchChartMode}
