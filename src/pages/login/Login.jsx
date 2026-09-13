@@ -39,7 +39,7 @@ const Login = () => {
   }
   const handlesubmitLoginForm = data => mutate(data)
   return (
-    <section className="h-screen w-screen flex justify-center items-center dark:bg-black bg-gray-50 px-4 dark:text-white flex-col gap-y-3">
+    <section className="min-h-screen w-screen flex justify-center items-center dark:bg-black bg-gray-50 max-sm:py-10 px-4 dark:text-white flex-col gap-y-3">
       <div className="w-full max-w-sm bg-white dark:bg-zinc-950 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-800 p-8 space-y-6">
         <div className="flex flex-col items-center gap-y-3 text-center">
           <div className="bg-blue-600/10 text-blue-600 rounded-full p-3">

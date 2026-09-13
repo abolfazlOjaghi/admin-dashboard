@@ -4,7 +4,7 @@ import { useCopy } from "../../../hooks/useCopy";
 const LoginGuide = ({ autofill }) => {
   const { copied, handleCopy } = useCopy();
   return (
-    <div className="bg-blue-600/5 border border-blue-600/20 rounded-xl p-4 space-y-2 w-96">
+    <div className="bg-blue-600/5 border border-blue-600/20 rounded-xl p-4 max-sm:py-4 max-sm:px-1.5 max-sm:w-80 space-y-2 w-96">
       <div className="flex items-center gap-x-2 text-blue-600">
         <KeyRound size={16} />
         <p className="text-sm font-semibold">Demo credentials</p>
@@ -19,7 +19,7 @@ const LoginGuide = ({ autofill }) => {
           <span className="font-mono font-medium">{PASSWORD}</span>
         </div>
       </div>
-      <div className="flex gap-x-2 justify-center">
+      <div className="flex gap-2 justify-center max-sm:flex-col">
         <button className="login-guide-button" onClick={autofill}>Autofill</button>
         <button className="login-guide-button" onClick={() => handleCopy("username", USERNAME)}>
           {copied === "username"  ? "Copied!" : "Copy username"}
