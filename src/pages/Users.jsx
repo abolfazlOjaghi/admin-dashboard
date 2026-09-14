@@ -69,10 +69,10 @@ const Users = () => {
   return (
     <div className="page space-y-6">
       <h3>Users</h3>
-      <div className="dark:bg-zinc-950 bg-gray-200 rounded-lg py-4 px-8 shadow-md">
+      <div className="dark:bg-zinc-950 bg-gray-200 rounded-lg py-4 sm:px-8 px-2 shadow-md">
         <Input
           {...register("search")}
-          width="w-80"
+          width="sm:w-80 w-full"
           placeholder="Search Users..."
         >
           <Search
