@@ -62,10 +62,10 @@ const Comments = () => {
     <div className="page">
       <section>
         <h3>Comments</h3>
-        <div className="dark:bg-zinc-950 bg-gray-50 p-4 rounded-xl flex flex-wrap items-center gap-4">
+        <div className="dark:bg-zinc-950 bg-gray-50 p-4 rounded-xl flex max-sm:flex-col items-center gap-4">
           <Input
             placeholder="search for comments..."
-            width="w-80"
+            width="w-80 max-sm:w-full"
             {...register("searchText")}
           >
             <Search
