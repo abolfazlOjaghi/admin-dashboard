@@ -5,11 +5,11 @@ import { ThemeContext } from "../../../context/ThemeContext";
 const Header = ({ onMenuClick }) => {
   const [theme, toggle] = useContext(ThemeContext);
   return (
-    <header className="w-full bg-white dark:bg-black py-7 px-1.5 max-sm:px-4 md:px-16 flex justify-between items-center fixed z-30 shadow-sm dark:shadow-zinc-950 border-b border-gray-100 dark:border-zinc-900">
+    <header className="w-full bg-white dark:bg-black py-7 px-1.5 max-sm:px-4 sm:px-4 lg:px-16 flex justify-between items-center fixed z-30 shadow-sm dark:shadow-zinc-950 border-b border-gray-100 dark:border-zinc-900">
       <div className="flex items-center gap-x-3">
         <button
           onClick={onMenuClick}
-          className="md:hidden flex items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors shrink-0"
+          className="lg:hidden flex items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors shrink-0"
           aria-label="Open menu"
         >
           <Menu size={20} className="dark:text-white" />

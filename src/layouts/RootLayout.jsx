@@ -12,7 +12,7 @@ const RootLayout = () => {
       {!isNoutFound && <Header onMenuClick={() => setIsSidebarOpen(true)} />}
       <main
         className={clsx(
-          !isNoutFound ? "grid md:grid-cols-[260px_1fr] pt-24" : "min-h-screen",
+          !isNoutFound ? "grid lg:grid-cols-[260px_1fr] pt-24" : "min-h-screen",
         )}
       >
         {!isNoutFound && (
