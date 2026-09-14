@@ -19,10 +19,7 @@ const Input = forwardRef(
       <>
         {label && <label htmlFor={inputId} className="text-black dark:text-white font-medium">{label}</label>}
         <div
-          className={clsx(
-            "relative flex-1",
-            width === "w-full" ? width : "max-w-80",
-          )}
+          className={clsx("relative flex-1", width)}
         >
           {children}
           <input

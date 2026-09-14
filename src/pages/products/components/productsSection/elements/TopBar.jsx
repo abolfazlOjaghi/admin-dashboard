@@ -20,25 +20,27 @@ const TopBar = ({
 }) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   return (
-    <div className="flex flex-wrap items-center gap-3 dark:bg-zinc-950 bg-gray-200 p-6 rounded-xl">
-      <button
-        className="product-topbar-button"
-        onClick={() => setIsAddModalOpen((prev) => !prev)}
-      >
-        <Plus size={20} />
-      </button>
-      <button className="product-topbar-button" onClick={productsViewToggle}>
-        {productsView === "grid" ? (
-          <LayoutGrid size={20} />
-        ) : (
-          <TableOfContents size={20} />
-        )}
-      </button>
+    <div className="flex flex-wrap items-center xl:gap-3 gap-2 dark:bg-zinc-950 bg-gray-200 xl:p-6 py-6 px-3 rounded-xl">
+      <div className="flex items-center max-sm:w-full max-sm:*:space-x-1.5 max-sm:*:flex-1 gap-x-2">
+        <button
+          className="product-topbar-button"
+          onClick={() => setIsAddModalOpen((prev) => !prev)}
+        >
+          <Plus size={20} /><span className="sm:hidden">Add Product</span>
+        </button>
+        <button className="product-topbar-button" onClick={productsViewToggle}>
+          <span className="sm:hidden">{productsView} view</span>{productsView === "grid" ? (
+            <LayoutGrid size={20} />
+          ) : (
+            <TableOfContents size={20} />
+          )}
+        </button>
+      </div>
       <Input
         value={search}
         onChange={searchInputChange}
         placeholder="Search products..."
-        width="w-80"
+        width="md:w-80 w-full"
       >
         <Search
           size={18}

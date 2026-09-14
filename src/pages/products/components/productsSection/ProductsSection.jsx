@@ -12,16 +12,16 @@ const ProductsSection = ({
   dependencyArray,
 }) => {
   return (
-    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-8 px-8 space-y-16">
+    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-8 md:px-8 px-3 space-y-16">
       {children}
 
       {products ? (
         products.products.length > 0 ? (
           <div
             className={clsx(
-              "gap-8",
+              "md:gap-4 gap-2",
               productsView === "grid"
-                ? "grid grid-cols-4"
+                ? "grid 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2"
                 : "flex flex-col items-center",
             )}
           >
@@ -53,9 +53,9 @@ const ProductsSection = ({
       ) : (
         <div
           className={clsx(
-            "gap-8",
+            "md:gap-4 gap-2",
             productsView === "grid"
-              ? "grid grid-cols-4"
+              ? "grid 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2"
               : "flex flex-col items-center",
           )}
         >

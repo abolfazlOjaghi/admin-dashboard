@@ -10,7 +10,7 @@ const PaginatingControls = ({
   nextDisabled,
 }) => {
   return (
-    <div className="flex flex-nowrap items-center justify-center gap-x-2 overflow-x-auto py-1 *:m-0!">
+    <div className="flex max-sm:flex-wrap items-center justify-center gap-x-2 overflow-x-auto py-1 *:m-0!">
       <button
         className="flex items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
         onClick={prevPage}
