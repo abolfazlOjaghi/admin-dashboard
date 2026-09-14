@@ -4,7 +4,7 @@
   @apply py-12 px-4 dark:bg-black dark:text-white *:space-y-10 min-h-screen;
 }
 .page h3 {
-  @apply text-3xl font-semibold;
+  @apply sm:text-3xl text-2xl font-semibold;
 }
 .details span {
   @apply text-gray-500;

@@ -44,7 +44,7 @@ const UserProfilePage = () => {
             </div>
           </div>
 
-          <div className="pt-16 pb-10 px-6 md:px-16 space-y-8">
+          <div className="pt-16 pb-10 px-4 lg:px-16 space-y-8">
             <div className="text-center space-y-1">
               <p className="text-xl font-semibold">
                 {user?.firstName} {user?.lastName}
@@ -55,7 +55,7 @@ const UserProfilePage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 space-y-3">
+              <div className="bg-white dark:bg-zinc-900 rounded-xl sm:p-6 px-3 py-6 space-y-3">
                 <h3 className="text-lg font-semibold mb-1">
                   Personal Information
                 </h3>
@@ -68,7 +68,7 @@ const UserProfilePage = () => {
                 ))}
               </div>
 
-              <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 space-y-3">
+              <div className="bg-white dark:bg-zinc-900 rounded-xl px-3 py-6 sm:p-6 space-y-3">
                 <h3 className="text-lg font-semibold mb-1 flex items-center gap-x-2">
                   <MapPin size={18} className="text-blue-600" />
                   Address
