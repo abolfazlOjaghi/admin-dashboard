@@ -12,7 +12,7 @@ const ProductsSection = ({
   dependencyArray,
 }) => {
   return (
-    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-8 md:px-8 px-3 space-y-16">
+    <section className="dark:bg-zinc-900 bg-gray-50 rounded-xl py-8 md:px-8 sm:px-3 px-1.5 space-y-16">
       {children}
 
       {products ? (
