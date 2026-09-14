@@ -8,7 +8,7 @@ const RootLayout = () => {
   const isNoutFound = matches.some((match) => match.handle?.isNotFound);
    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   return (
-    <div className="min-h-screen grid grid-rows-[auto_1fr_auto] overflow-x-hidden">
+    <div className="min-h-screen grid grid-rows-[auto_1fr_auto] max-lg:overflow-x-hidden">
       {!isNoutFound && <Header onMenuClick={() => setIsSidebarOpen(true)} />}
       <main
         className={clsx(
