@@ -139,7 +139,7 @@ const AddModal = ({ cancel }) => {
         </h4>
       </div>
       <form
-        className="w-full flex flex-col items-center *:w-full gap-y-1.5"
+        className="w-full flex flex-col items-center *:w-full gap-y-1.5 max-sm:gap-y-0.5"
         id="addProductForm"
         onSubmit={handleSubmit(handleSubmitForm)}
       >
