@@ -1,6 +1,6 @@
 # Admin Dashboard
 
-A full-featured admin dashboard built with React, Vite, and Tailwind CSS — powered by the [DummyJSON](https://dummyjson.com) API for products, users, and comments.
+An admin dashboard built with React, Vite, and Tailwind CSS — powered by the DummyJSON API for products, users, and comments.
 
 ## 🌐 Live Demo
 
