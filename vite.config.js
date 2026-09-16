@@ -11,4 +11,5 @@ export default defineConfig({
       presets: [reactCompilerPreset()],
     }),
   ],
+  base: "/admin-dashboard/"
 });
