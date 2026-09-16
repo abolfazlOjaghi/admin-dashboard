@@ -1,6 +1,6 @@
-import { Lock } from "lucide-react";
+import { Lock, AtSign, EyeOff, Eye } from "lucide-react";
 import Input from "../../components/ui/Input";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,13 +11,14 @@ import { toast } from "sonner";
 import LoginGuide from "./elements/LoginGuide";
 import { USERNAME, PASSWORD } from "../../data/constans";
 const Login = () => {
+  const [seePassword, setSeePassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
@@ -34,10 +35,10 @@ const Login = () => {
     },
   });
   const handleAutofill = () => {
-    setValue("username", USERNAME)
-    setValue("password", PASSWORD)
-  }
-  const handlesubmitLoginForm = data => mutate(data)
+    setValue("username", USERNAME);
+    setValue("password", PASSWORD);
+  };
+  const handlesubmitLoginForm = (data) => mutate(data);
   return (
     <section className="min-h-screen w-screen flex justify-center items-center dark:bg-black bg-gray-50 max-sm:py-10 px-4 dark:text-white flex-col gap-y-3">
       <div className="w-full max-w-sm bg-white dark:bg-zinc-950 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-800 p-8 space-y-6">
@@ -53,22 +54,34 @@ const Login = () => {
           </div>
         </div>
 
-        <form className="space-y-1.5" onSubmit={handleSubmit(handlesubmitLoginForm)}>
+        <form
+          className="space-y-1.5"
+          onSubmit={handleSubmit(handlesubmitLoginForm)}
+        >
           <Input
             placeholder="Enter your username"
             label="Username"
             {...register("username")}
             error={errors.username?.message}
             reserveErrorSpace
-          />
+          >
+            <AtSign size={18} className="input-icon" />
+          </Input>
           <Input
             placeholder="Enter your password"
             label="Password"
-            type="password"
+            type={seePassword ? "text" : "password"}
             {...register("password")}
             error={errors.password?.message}
             reserveErrorSpace
-          />
+          >
+            <div
+              className="input-icon cursor-pointer"
+              onClick={() => setSeePassword((prev) => !prev)}
+            >
+              {!seePassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </div>
+          </Input>
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-2.5 font-medium cursor-pointer transition-colors mt-2 disabled:bg-gray-500"
@@ -78,7 +91,7 @@ const Login = () => {
           </button>
         </form>
       </div>
-      <LoginGuide autofill={handleAutofill}/>
+      <LoginGuide autofill={handleAutofill} />
     </section>
   );
 };

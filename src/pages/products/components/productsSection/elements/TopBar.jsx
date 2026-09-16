@@ -44,7 +44,7 @@ const TopBar = ({
       >
         <Search
           size={18}
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+          className="input-icon"
         />
       </Input>
       <div className="relative">

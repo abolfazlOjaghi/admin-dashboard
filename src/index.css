@@ -21,6 +21,9 @@
 .login-guide-button {
   @apply cursor-pointer bg-blue-400 px-1.5 py-1.5 rounded-lg font-medium hover:bg-blue-600 transition-colors duration-100 text-white;
 }
+.input-icon {
+  @apply absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400;
+}
 * {
   user-select: none;
 }
