@@ -9,52 +9,57 @@ import NotFound from "./pages/NotFound";
 import UserProfile from "./pages/userProfile/UserProfilePage";
 import ProtectRoots from "./ProtectRoots";
 import Login from "./pages/login/Login";
-const routes = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    element: <ProtectRoots />,
-    children: [
-      {
-        path: "/",
-        element: <RootLayout />,
-        children: [
-          {
-            index: true,
-            element: <Home />,
-          },
-          {
-            path: "/products",
-            element: <Products />,
-          },
-          {
-            path: "/products/:productId",
-            element: <ProductInfo />,
-          },
-          {
-            path: "/users",
-            element: <Users />,
-          },
-          {
-            path: "/users/:userId",
-            element: <UserProfile />,
-          },
-          {
-            path: "/comments",
-            element: <Comments />,
-          },
-          {
-            path: "*",
-            element: <NotFound />,
-            handle: {
-              isNotFound: true,
+const routes = createBrowserRouter(
+  [
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      element: <ProtectRoots />,
+      children: [
+        {
+          path: "/",
+          element: <RootLayout />,
+          children: [
+            {
+              index: true,
+              element: <Home />,
             },
-          },
-        ],
-      },
-    ],
+            {
+              path: "/products",
+              element: <Products />,
+            },
+            {
+              path: "/products/:productId",
+              element: <ProductInfo />,
+            },
+            {
+              path: "/users",
+              element: <Users />,
+            },
+            {
+              path: "/users/:userId",
+              element: <UserProfile />,
+            },
+            {
+              path: "/comments",
+              element: <Comments />,
+            },
+            {
+              path: "*",
+              element: <NotFound />,
+              handle: {
+                isNotFound: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  {
+    basename: "/admin-dashboard",
   },
-]);
+);
 export default routes;
