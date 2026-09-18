@@ -1,4 +1,4 @@
-import { ChevronRight, Star } from "lucide-react";
+import { ChevronRight, Star, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
@@ -45,14 +45,11 @@ const ProductRow = ({
           <Tags tags={tags} color="product-tags" />
         </div>
       </div>
-      <div className="">
+      <div>
         <div className="flex items-center gap-4 flex-wrap justify-end">
           <Tags tags={[`${discount}% Off`]} color="discount-tag" />
           <span className="text-2xl font-bold text-blue-600">{price}$</span>
           <div className="flex gap-x-2 items-center">
-            <DeleteButton padding="px-6" click={toggleModal}>
-              Delete
-            </DeleteButton>
             <Link to={infoRoot}>
               <button className="flex items-center gap-x-2 bg-blue-600/80 dark:bg-blue-500/80 text-white hover:bg-blue-600 rounded-xl pl-5 pr-2 py-2 font-medium transition-all duration-200 cursor-pointer">
                 Info
@@ -62,6 +59,9 @@ const ProductRow = ({
               </button>
             </Link>
           </div>
+          <DeleteButton padding="p-3" click={toggleModal}>
+            <Trash2 />
+          </DeleteButton>
         </div>
       </div>
 

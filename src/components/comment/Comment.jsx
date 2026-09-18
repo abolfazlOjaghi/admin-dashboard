@@ -1,4 +1,4 @@
-import { CircleUserRound, ThumbsUp, Star } from "lucide-react";
+import { CircleUserRound, ThumbsUp, Star, Trash2 } from "lucide-react";
 import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
@@ -42,8 +42,8 @@ const {
             </span>
           </div>
         </div>
-        <DeleteButton padding="px-4" click={toggleModal}>
-          Delete
+        <DeleteButton padding="p-3" click={toggleModal}>
+          <Trash2/>
         </DeleteButton>
       </div>
 

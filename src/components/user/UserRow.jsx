@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router";
 import DeleteModal from "../modal/DeleteModal";
 import DeleteButton from "../ui/DeleteButton";
@@ -62,8 +62,9 @@ const UserRow = ({
             <ChevronRight />
           </button>
           {!you && (
-            <DeleteButton padding="px-6" click={toggleModal}>
-              Delete User
+            <DeleteButton padding="p-3" click={toggleModal}>
+              <div className="max-sm:hidden"><Trash2 /></div>
+              <span className="sm:hidden">Delete user</span>
             </DeleteButton>
           )}
         </div>
