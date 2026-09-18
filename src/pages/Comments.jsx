@@ -133,6 +133,7 @@ const Comments = () => {
                     isSearching ? "all" : currentPage,
                     COMMENTS_LIMIT,
                   ]}
+                  userId={comment.user.id}
                 />
               ))}
           {isSearching && visibleComments?.length === 0 && (

@@ -3,6 +3,7 @@ import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
 import ModalContainer from "../../features/ModalContainer";
+import { useNavigate } from "react-router";
 const Comment = ({
   body,
   likes = "",
@@ -13,7 +14,9 @@ const Comment = ({
   id,
   dependencyArray,
   review = false,
+  userId
 }) => {
+  const navigate = useNavigate()
 const {
   deleteItem: deleteComment,
   toggleModal,
@@ -28,7 +31,7 @@ const {
   return (
     <div className="rounded-xl max-sm:p-3 px-5 py-4 dark:bg-zinc-900 bg-gray-50 border border-transparent dark:border-zinc-800 space-y-3">
       <div className="flex items-start justify-between gap-x-4">
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-3 cursor-pointer" onClick={() => navigate(`/users/${userId}`)}>
           <div className="bg-blue-600/10 text-blue-600 rounded-full p-1.5">
             <CircleUserRound size={28} />
           </div>

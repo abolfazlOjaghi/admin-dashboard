@@ -145,6 +145,7 @@ const Home = () => {
                     username={comment.user.username}
                     likes={comment.likes}
                     dependencyArray={["comments"]}
+                    userId={comment.user.id}
                   />
                 );
               })}
