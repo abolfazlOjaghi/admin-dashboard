@@ -55,7 +55,7 @@ const UserRow = ({
         </div>
         <div className="flex gap-3 max-sm:flex-col">
           <button
-            className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600 max-sm:justify-center"
+            className="py-1.5 text-lg font-medium px-4 rounded-xl bg-gray-50 dark:bg-zinc-950 flex items-center gap-x-1.5 cursor-pointer hover:text-white hover:bg-blue-600 max-sm:justify-center border-2 border-blue-600 transition-colors "
             onClick={() => navigate(`/users/${id}`)}
           >
             <p>{you ? "Your" : "View"} Profile</p>
