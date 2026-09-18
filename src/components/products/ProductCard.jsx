@@ -4,7 +4,7 @@ import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
 import { Star } from "lucide-react";
 import ModalContainer from "../../features/ModalContainer";
-import Tags from "./tags";
+import Tags from "./elements/Tags";
 const ProductCard = ({
   children,
   image,
@@ -15,6 +15,7 @@ const ProductCard = ({
   id,
   dependencyArray,
   tags,
+  discount,
 }) => {
   const navigate = useNavigate();
   const {
@@ -42,13 +43,16 @@ const ProductCard = ({
         <p className="font-semibold text-lg line-clamp-1">{title}</p>
 
         <div className="flex items-center justify-between">
-          <p className="text-2xl font-bold text-blue-600">{price}$</p>
+          <div className="flex items-center gap-1.5">
+            <p className="text-2xl font-bold text-blue-600">{price}$</p>
+            <Tags tags={[`${discount}% Off`]} color="discount-tag" />
+          </div>
           <span className="flex items-center gap-1 bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm font-medium px-2 py-1 rounded-lg">
             <Star size={14} className="fill-amber-500 text-amber-500" />
             {rating}
           </span>
         </div>
-        <Tags tags={tags} color="bg-orange-600/10 text-orange-500" />
+        <Tags tags={tags} color="product-tags" />
 
         <div className="flex gap-2 items-center mt-2 *:w-full">
           <button className="bg-blue-600 text-white border-2 border-blue-600 px-4 py-1.5 rounded-xl text-base font-medium cursor-pointer hover:bg-blue-700 transition-colors">

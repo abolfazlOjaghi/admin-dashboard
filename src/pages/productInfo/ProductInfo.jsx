@@ -7,7 +7,7 @@ import BackButton from "../../components/ui/BackButton";
 import ProductInfoPageSkeleton from "./skeleton/ProductInfoPageSkeleton";
 import { Star, Package, ShieldCheck } from "lucide-react";
 import ErrorState from "../../components/ErrorState";
-import Tags from "../../components/products/tags";
+import Tags from "../../components/products/elements/Tags";
 const StarRating = ({ rating = 0 }) => {
   const rounded = Math.round(rating);
   return (

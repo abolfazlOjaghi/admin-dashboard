@@ -4,7 +4,7 @@ import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
 import ModalContainer from "../../features/ModalContainer";
-import Tags from "./tags";
+import Tags from "./elements/Tags";
 const ProductRow = ({
   image,
   title,
@@ -14,6 +14,7 @@ const ProductRow = ({
   id,
   dependencyArray,
   tags,
+  discount,
 }) => {
   const {
     deleteItem: deleteProduct,
@@ -31,19 +32,22 @@ const ProductRow = ({
             className="w-full h-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
           />
         </div>
-          <div className="space-y-1">
+        <div className="space-y-1">
+          <div className="flex gap-2 items-center">
             <p className="font-semibold text-xl line-clamp-1 max-sm:text-lg">
               {title}
             </p>
-            <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
-              <Star size={16} className="fill-amber-500 text-amber-500" />
-              {rating}/5
-            </span>
-          <Tags tags={tags} color="bg-orange-600/10 text-orange-500"/>
+          </div>
+          <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
+            <Star size={16} className="fill-amber-500 text-amber-500" />
+            {rating}/5
+          </span>
+          <Tags tags={tags} color="product-tags" />
         </div>
       </div>
       <div className="">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap justify-end">
+          <Tags tags={[`${discount}% Off`]} color="discount-tag" />
           <span className="text-2xl font-bold text-blue-600">{price}$</span>
           <div className="flex gap-x-2 items-center">
             <DeleteButton padding="px-6" click={toggleModal}>

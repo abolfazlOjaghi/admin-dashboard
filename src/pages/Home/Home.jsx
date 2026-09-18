@@ -4,7 +4,7 @@ import MonthsInfo from "./components/MonthsInfo";
 import ProductCard from "../../components/products/ProductCard";
 import { getProducts } from "../../services/requests/products";
 import { getProductHighlights } from "../../utils/getProductHighlights";
-import Badge from "../../components/products/Badge";
+import Badge from "../../components/products/elements/Badge";
 import { getUsers } from "../../services/requests/users";
 import UserRow from "../../components/user/UserRow";
 import { useFetch } from "../../hooks/useFetch";
@@ -88,6 +88,8 @@ const Home = () => {
                   rating={product.rating}
                   children={<Badge text={product.text} color={product.color} />}
                   dependencyArray={["products"]}
+                  tags={product.tags}
+                  discount={product.discountPercentage}
                 />
               );
             })
