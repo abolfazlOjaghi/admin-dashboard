@@ -7,6 +7,7 @@ import BackButton from "../../components/ui/BackButton";
 import ProductInfoPageSkeleton from "./skeleton/ProductInfoPageSkeleton";
 import { Star, Package, ShieldCheck } from "lucide-react";
 import ErrorState from "../../components/ErrorState";
+import Tags from "../../components/products/tags";
 const StarRating = ({ rating = 0 }) => {
   const rounded = Math.round(rating);
   return (
@@ -58,13 +59,9 @@ const ProductsInfo = () => {
 
               <div className="flex-1 space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-blue-600 bg-blue-600/10 px-2.5 py-1 rounded-full uppercase tracking-wide">
-                    {data?.category}
-                  </span>
+                  <Tags tags={[data?.tags]} color="bg-blue-600/10 text-blue-600" />
                   {data?.brand && (
-                    <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-zinc-800 px-2.5 py-1 rounded-full">
-                      {data.brand}
-                    </span>
+                    <Tags tags={[data.brand]} color="text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-zinc-800" />
                   )}
                 </div>
 

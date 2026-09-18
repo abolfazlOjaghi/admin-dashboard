@@ -36,6 +36,7 @@ const ProductsSection = ({
                 productsView,
                 infoRoot: `/products/${product.id}`,
                 dependencyArray,
+                tags : product.tags
               };
 
               return productsView === "grid" ? (

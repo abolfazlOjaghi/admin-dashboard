@@ -4,6 +4,7 @@ import DeleteButton from "../ui/DeleteButton";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
 import ModalContainer from "../../features/ModalContainer";
+import Tags from "./tags";
 const ProductRow = ({
   image,
   title,
@@ -12,6 +13,7 @@ const ProductRow = ({
   infoRoot,
   id,
   dependencyArray,
+  tags,
 }) => {
   const {
     deleteItem: deleteProduct,
@@ -29,12 +31,15 @@ const ProductRow = ({
             className="w-full h-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
           />
         </div>
-        <div className="space-y-1">
-          <p className="font-semibold text-xl line-clamp-1 max-sm:text-lg">{title}</p>
-          <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
-            <Star size={16} className="fill-amber-500 text-amber-500" />
-            {rating}/5
-          </span>
+          <div className="space-y-1">
+            <p className="font-semibold text-xl line-clamp-1 max-sm:text-lg">
+              {title}
+            </p>
+            <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
+              <Star size={16} className="fill-amber-500 text-amber-500" />
+              {rating}/5
+            </span>
+          <Tags tags={tags} color="bg-orange-600/10 text-orange-500"/>
         </div>
       </div>
       <div className="">

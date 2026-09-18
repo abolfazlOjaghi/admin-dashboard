@@ -4,6 +4,7 @@ import { useDeleteItem } from "../../hooks/useDeleteItem";
 import DeleteModal from "../modal/DeleteModal";
 import { Star } from "lucide-react";
 import ModalContainer from "../../features/ModalContainer";
+import Tags from "./tags";
 const ProductCard = ({
   children,
   image,
@@ -13,6 +14,7 @@ const ProductCard = ({
   infoRoot,
   id,
   dependencyArray,
+  tags,
 }) => {
   const navigate = useNavigate();
   const {
@@ -46,6 +48,7 @@ const ProductCard = ({
             {rating}
           </span>
         </div>
+        <Tags tags={tags} color="bg-orange-600/10 text-orange-500" />
 
         <div className="flex gap-2 items-center mt-2 *:w-full">
           <button className="bg-blue-600 text-white border-2 border-blue-600 px-4 py-1.5 rounded-xl text-base font-medium cursor-pointer hover:bg-blue-700 transition-colors">
@@ -57,7 +60,11 @@ const ProductCard = ({
 
       {isModalOpen && (
         <ModalContainer cancel={toggleModal}>
-          <DeleteModal handleDelete={deleteProduct} cancel={toggleModal} item="product"/>
+          <DeleteModal
+            handleDelete={deleteProduct}
+            cancel={toggleModal}
+            item="product"
+          />
         </ModalContainer>
       )}
     </div>
