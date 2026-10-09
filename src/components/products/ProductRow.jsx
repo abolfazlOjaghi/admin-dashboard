@@ -60,7 +60,7 @@ const ProductRow = ({
             </Link>
           </div>
           <DeleteButton padding="p-3" click={toggleModal}>
-            <Trash2 />
+            <p className="sm:hidden">Delete</p><Trash2 className="max-sm:hidden" />
           </DeleteButton>
         </div>
       </div>
